@@ -1,6 +1,6 @@
 <?php
 global $sals_version;
-$sals_version = '1.0';
+$sals_version = '1.0.0';
 
 function sals_db_install() {
 	global $wpdb;
@@ -12,15 +12,14 @@ function sals_db_install() {
 
 	$sals_info = "CREATE TABLE $table_name (
 		id int NOT NULL AUTO_INCREMENT,
-		uid tinyint NOT NULL,
-		video_url_main varchar(300) NOT NULL,
-		video_url_ads text,
-		ad_start varchar(200),
+		main_video_url varchar(300) NOT NULL,
+		ads_video_url text,
+		ads_start varchar(200),
 		PRIMARY KEY  (id)
 	) $charset_collate;";
 
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	dbDelta( $sals_info ); // array($cookie_info, $product_info, $visitor_info)
+	dbDelta( $sals_info ); // run query
 
 	add_option( 'sals_version', $sals_version );
 }

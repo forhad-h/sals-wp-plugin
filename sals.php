@@ -27,16 +27,18 @@ function sals_static_video_options() {
 ?>
 
 
-<div class="wrap">
-    <h1>Custom theme options</h1>
+<div class="sals_wrapper">
+    <h1>Add Static video with Ads</h1>
 
-    <form method="post" action="options.php">
+    <form method="post" action="#">
         <div class="fields_wrapper">
-            <h3>Header part</h3>
-
             <div class="single_option">
-                <h4>Header CTA button text</h4>
+                <h4>Main video URL</h4>
                 <input type="text" name="new_option_name" value="" />
+            </div>
+            <div class="single_option">
+                <h4>Ads</h4>
+                <button class="new_ad_btn" type="button">New Ad</button>
             </div>
         </div>
 
@@ -45,4 +47,11 @@ function sals_static_video_options() {
     </form>
 </div>
 
-<?php } ?>
+<?php }
+// load scripts to frontend
+add_action('wp_enqueue_scripts', 'sals_enqueue_scripts');
+function sals_enqueue_scripts() {
+
+}
+
+?>
