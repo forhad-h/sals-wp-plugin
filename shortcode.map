@@ -1,0 +1,6 @@
+[sals-wp
+  data_uid="0"
+  video_url_main="http://localhost/wordpress/video/tears-of-steel-battle-clip-medium.mp4"
+  video_url_ads="['http://localhost/wordpress/video/movie.mp4', 'http://localhost/wordpress/video/movie.mp4']"
+  ad_start=["1", "15"]
+]

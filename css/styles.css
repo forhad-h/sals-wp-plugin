@@ -1,0 +1,389 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: #666;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", Lucida, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: #666;
+  font-size: 20px;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+a {
+  color: #0095dd;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #2255aa;
+  text-decoration: underline;
+}
+
+figure {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+figcaption {
+  display: block;
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+video {
+  width: 100%;
+}
+
+/* controls */
+.sals_video-controls, .sals_video-controls>* {
+  padding: 0;
+  margin: 0;
+}
+
+.sals_video-controls {
+  width: 95%;
+  overflow: hidden;
+  background: transparent;
+  /* of figure's height */
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  padding: 8px;
+  -webkit-transition: 0.25s linear;
+  -moz-transition: 0.25s linear;
+  -o-transition: 0.25s linear;
+  transition: 0.25s linear;
+  border-radius: 10px;
+  z-index: 9999;
+}
+
+.sals_video-controls[data-state=hidden] {
+  display: none;
+}
+
+.sals_video-controls[data-state=visible] {
+  display: block;
+}
+
+.sals_video-controls>* {
+  float: left;
+  width: 3.90625%;
+  height: 100%;
+  margin-left: 0.1953125%;
+  display: block;
+}
+
+.sals_video-controls>*:first-child {
+  margin-left: 0;
+}
+
+.sals_video-controls .progress {
+  cursor: pointer;
+  width: 75.390625%;
+}
+
+.sals_video-controls button {
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: none;
+  cursor: pointer;
+  text-indent: -99999px;
+  background: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  opacity: 0.4
+}
+
+.sals_video-controls:hover button {
+  opacity: 0.8;
+}
+
+.sals_video-controls button:hover, .sals_video-controls button:focus {
+  opacity: 1;
+}
+
+.sals_video-controls button[data-state="play"] {
+  background-image: url('../img/player_play.png');
+  width: 30px;
+  height: 30px;
+}
+
+.sals_video-controls button[data-state="pause"] {
+  background-image: url('../img/player_pause.png');
+  width: 30px;
+  height: 30px;
+}
+
+.sals_video-controls button[data-state="go-fullscreen"] {
+  background-image: url('../img/fullscreen.png');
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: 10px;
+  float: right;
+}
+
+.sals_video-controls button.sals_volume {
+  width: 160px;
+  height: 25px;
+  cursor: initial;
+}
+
+.sals_video-controls button.sals_volume .sals_volume__icon {
+  background-image: url('../img/volume.png');
+  width: 25px;
+  height: 25px;
+  margin-top: 5px;
+  margin-left: 10px;
+  display: block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: left;
+}
+
+.sals_video-controls button.sals_volume .sals_volume__controller {
+  display: block;
+  width: 100px;
+  height: 5px;
+  background-color: #c73e07;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.5);
+  float: left;
+  margin-top: 12px;
+  margin-left: 10px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.sals_video-controls button.sals_volume .sals_volume__pointer {
+  width: 15px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: #c73e07;
+  position: absolute;
+  left: 40px;
+  top: -4px;
+}
+
+.sals_video-controls button[data-state="cancel-fullscreen"] {
+  background-image: url('../img/exitfullscreen.png');
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: 10px;
+  float: right;
+}
+
+.sals_video-controls progress {
+  display: block;
+  width: 100%;
+  height: 81%;
+  margin-top: 2px;
+  margin-top: 0.125rem;
+  border: none;
+  overflow: hidden;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  color: #0095dd;
+  /* Internet Explorer uses this value as the progress bar's value colour */
+}
+
+.sals_video-controls progress[data-state="fake"] {
+  background: #e6e6e6;
+  height: 65%;
+}
+
+.sals_video-controls progress span {
+  width: 0%;
+  height: 100%;
+  display: inline-block;
+  background-color: #2a84cd;
+}
+
+.sals_video-controls progress::-moz-progress-bar {
+  background-color: #0095dd;
+}
+
+/* Chrome requires its own rule for this, otherwise it ignores it */
+.sals_video-controls progress::-webkit-progress-value {
+  background-color: #0095dd;
+}
+
+/* fullscreen */
+html:-ms-fullscreen {
+  width: 100%;
+}
+
+:-webkit-full-screen {
+  background-color: transparent;
+}
+
+video:-webkit-full-screen+.sals_video-controls {
+  background: #ccc;
+  /* required for Chrome which doesn't heed the transparent value set above */
+}
+
+video:-webkit-full-screen+.sals_video-controls progress {
+  margin-top: 0.5rem;
+}
+
+/* hide controls on fullscreen with WebKit */
+figure[data-fullscreen=true] video::-webkit-media-controls {
+  display: none !important;
+}
+
+figure[data-fullscreen=true] {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
+}
+
+figure[data-fullscreen=true] video {
+  height: auto;
+}
+
+figure[data-fullscreen=true] figcaption {
+  display: none;
+}
+
+figure[data-fullscreen=true] .sals_video-controls {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  z-index: 2147483647;
+}
+
+figure[data-fullscreen=true] .sals_video-controls li {
+  width: 5%;
+}
+
+figure[data-fullscreen=true] .sals_video-controls .progress {
+  width: 68%;
+}
+
+/* Media Queries */
+@media screen and (max-width:1024px) {
+  figure {
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+  }
+}
+
+@media screen and (max-width:42.5em) {
+  .sals_video-controls {
+    height: auto;
+  }
+
+  .sals_video-controls>* {
+    display: block;
+    width: 16.6667%;
+    margin-left: 0;
+    height: 40px;
+    height: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .sals_video-controls .progress {
+    /*display:table-caption;*/
+    /* this trick doesn't work as elements are floated and the layout doesn't work */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    float: none;
+    margin-top: 0;
+  }
+
+  .sals_video-controls .progress progress {
+    width: 98%;
+    margin: 0 auto;
+  }
+
+  .sals_video-controls button {
+    background-position: center center;
+  }
+
+  figcaption {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
+
+/*General styles*/
+button:active, button:focus {
+  outline: none;
+}
+
+/* Ads style */
+.sals_video_main {
+  position: relative;
+}
+
+.sals_video_main .sals_ads {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+}
+
+.sals_ads .sals__single_ad {
+  width: 100%;
+  height: 100%;
+}
+
+.sals_ads .sals__single_ad .sals__video_ad {
+  width: 100%;
+  height: 99%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.sals_ads img {
+  max-width: 100%;
+}
+
+button.sals__skip_btn {
+  min-width: 115px;
+  background: transparent;
+  opacity: 0.85;
+  color: #fff;
+  text-indent: 0;
+  padding: 8px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  font-size: 1.3rem;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 99999999;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5)
+}
+
+button.sals__skip_btn:hover {
+  opacity: 1;
+}
