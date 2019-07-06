@@ -6,9 +6,7 @@
 * Version: 1.0.0
 * Author: Forhad Hosain
 **/
-
-
-require_once ("create_table.php");
+require_once 'shortcode.php';
 register_activation_hook( __FILE__, 'sals_db_install' );
 
 if ( is_admin() ){
@@ -37,11 +35,13 @@ function sals_static_video_options() {
   <div class="sals_options_area">
     <h1>Add Static video with Ads</h1>
 
-    <form method="post" action="#">
+    <form id="sals_video_options_form" method="post" action="#">
         <div class="sals_fields_wrapper">
             <div class="sals_single_option">
                 <h3>Main video URL *</h3>
                 <input type="text" name="main_video_url" id="main_video_url" value="" />
+                <h3>Main video Poster URL *</h3>
+                <input type="text" name="main_video_poster" id="main_video_poster" value="" />
             </div>
             <div class="sals_single_option">
                 <h3>Ads</h3>
@@ -64,12 +64,12 @@ function sals_static_video_options() {
 <?php }
 // load scripts to frontend
 add_action('wp_enqueue_scripts', 'sals_frontend_scripts');
-function sals_enqueue_scripts() {
+function sals_frontend_scripts() {
   // load js for video player
   wp_enqueue_script('sals-video-player', plugin_dir_url(__FILE__).'js/video-player.js', array(), '1.0.0', true);
 
   // load css for frontend
-  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css.style.css');
+  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css/styles.css', '1.0.0');
 }
 
 // load scripts to backend

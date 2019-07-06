@@ -1,3 +1,19 @@
+.sals_wrapper input {
+  border-radius: 3px;
+  background: #fff;
+}
+
+.sals_wrapper button {
+  opacity: 0.8;
+}
+
+.sals_wrapper button:hover,
+.sals_wrapper button:active,
+.sals_wrapper button:focus {
+  opacity: 1;
+  outline: none;
+}
+
 .sals_wrapper {
   display: flex;
   margin-top: 25px;
@@ -65,7 +81,6 @@
 .sals_submit_btn,
 .sals_generate_btn {
   background: #ff5d40;
-  opacity: 0.9;
   border: 0 none;
   padding: 7px 14px;
   font-size: 1.2rem;
@@ -76,19 +91,6 @@
   cursor: pointer;
   margin-right: 15px;
   transition: 0.25s linear;
-}
-
-.sals_new_ad_btn:focus,
-.sals_new_ad_btn:active,
-.sals_new_ad_btn:hover,
-.sals_submit_btn:focus,
-.sals_submit_btn:active,
-.sals_submit_btn:hover,
-.sals_generate_btn:focus,
-.sals_generate_btn:active,
-.sals_generate_btn:hover {
-  opacity: 1;
-  outline: none;
 }
 
 .sals_submit_btn_wrapper {
@@ -118,8 +120,38 @@
   padding: 0 20px 20px 20px;
   margin-bottom: 10px;
   border-radius: 3px;
+  position: relative;
 }
 
 .sals_single_ad input {
   padding: 5px;
+}
+
+.sals_close_btn {
+  position: absolute;
+  top: 5px;
+  right: 4px;
+  border: 1px solid #ccc;
+  background: transparent;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  color: #999;
+  padding: 0px 5px 5px 5px;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.15s linear;
+}
+
+.sals_close_btn:hover {
+  border: 1px solid #555;
+  color: #555;
+}
+
+input.sals_error_field {
+  -webkit-box-shadow: 0 0 5px #f00;
+  -moz-box-shadow: 0 0 5px #f00;
+  -o-box-shadow: 0 0 5px #f00;
+  box-shadow: 0 0 5px #f00;
 }

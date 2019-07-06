@@ -72,6 +72,7 @@
       // Set the video container's fullscreen state
       var setFullscreenData = function(state, vcuid) {
         if (vcuid) {
+          ads[vcuid].style.height = videoContainer[vcuid].clientHeight + "px"
           if (!(!!state)) {
             videoContainer[vcuid].classList.remove(hasFSClassName)
           }
@@ -135,6 +136,7 @@
             video[puid].pause()
             ads[puid].style.display = 'block'
             singleAdStartElm.style.display = 'block'
+            adVideo.volume = video[puid].volume
             adVideo.play()
             adVideo.addEventListener('ended', function() {
               ads[puid].style.display = 'none'
