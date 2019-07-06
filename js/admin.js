@@ -111,8 +111,12 @@
     for (var j = 0; j < singleAdElms.length; j++) {
       var adURLElm = singleAdElms[j].querySelector('.sals_ad_url')
       var adStartTimeElm = singleAdElms[j].querySelector('.sals_ad_start_time')
-      adsVideoURLs.push(adURLElm.value)
-      adsVideoStartTimes.push(adStartTimeElm.value)
+      if (adURLElm.value) {
+        adsVideoURLs.push(adURLElm.value)
+      }
+      if (adStartTimeElm.value) {
+        adsVideoStartTimes.push(adStartTimeElm.value)
+      }
     }
 
 
@@ -139,7 +143,13 @@
 
   function validateInput(mUrl, mPoster, aUrls, aTimes) {
     // just checking is any field value is empty
-    if (!mUrl || !mPoster || aUrls.length <= 0 || !aTimes.length <= 0) {
+    if (
+      !mUrl || !mPoster ||
+      (document.querySelectorAll('.sals_single_ad').length > 0 &&
+        (aUrls.length <= 0 || aTimes.length <= 0)) ||
+      document.querySelectorAll('.sals_single_ad').length !== aUrls.length ||
+      document.querySelectorAll('.sals_single_ad').length !== aTimes.length
+    ) {
       var allInputs = document.querySelectorAll('#sals_video_options_form input');
 
       for (var i = 0; i < allInputs.length; i++) {
