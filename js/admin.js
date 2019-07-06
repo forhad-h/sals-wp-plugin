@@ -111,8 +111,12 @@
     for (var j = 0; j < singleAdElms.length; j++) {
       var adURLElm = singleAdElms[j].querySelector('.sals_ad_url')
       var adStartTimeElm = singleAdElms[j].querySelector('.sals_ad_start_time')
-      adsVideoURLs.push(adURLElm.value)
-      adsVideoStartTimes.push(adStartTimeElm.value)
+      if (adURLElm.value) {
+        adsVideoURLs.push(adURLElm.value)
+      }
+      if (adStartTimeElm.value) {
+        adsVideoStartTimes.push(adStartTimeElm.value)
+      }
     }
 
 
