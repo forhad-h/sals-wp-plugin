@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-
   // Does the browser actually support the video element?
   var supportsVideo = !!document.createElement('video').canPlayType;
 
@@ -21,7 +20,8 @@
 
     var sals_liveTime = [],
       increaseTime = [],
-      checkAds = [];
+      checkAds = [],
+      pausedByAd = false;
 
     for (var uid = 0; uid < videoContainer.length; uid++) {
       videoContainer[uid].setAttribute('data-uid', uid)
@@ -33,7 +33,6 @@
 
     for (var i = 0; i < videoContainer.length; i++) {
       // custom variables
-      var intervalTime = 1000;
       var hasFSClassName = 'sals_hasFullscreen';
 
       // Hide the default controls
@@ -121,33 +120,52 @@
       }
       // display or hide Ads
 
-      var adToggle = function(sals_liveTime, puid) {
+      var adToggle = function(state, sals_liveTime, puid) {
+
         var singleAdStartElm = ads[puid]
           .querySelector("[data-adstart='" + Math.floor(sals_liveTime) + "']");
 
+        // save paused time into session storage
+        if (typeof(Storage) !== 'undefined') {
+          sessionStorage.setItem('playTime-' + puid, Math.floor(sals_liveTime));
+        }
+        var playTime = parseFloat(sessionStorage.getItem('playTime-' + puid));
+
         if (singleAdStartElm) {
           // video of Ad which is streaming now
-          var adVideo = singleAdStartElm.querySelector('.sals__video_ad')
-          var skipBtnElm = singleAdStartElm.querySelector('.sals__skip_btn')
-          var counter = 5
+          var adVideo = singleAdStartElm.querySelector('.sals__video_ad');
+          var skipBtnElm = singleAdStartElm.querySelector('.sals__skip_btn');
+          var counter = 5;
 
           if (singleAdStartElm.getAttribute('data-addisplayed') !== "true") {
+            // display ads pause main video
             singleAdStartElm.setAttribute('data-addisplayed', true)
-            video[puid].pause()
+
+            if (!video[puid].paused || !video[puid].ended) {
+              clearInterval(increaseTime[puid]);
+              video[puid].pause();
+              pausedByAd = true;
+            }
+
             ads[puid].style.display = 'block'
             singleAdStartElm.style.display = 'block'
             adVideo.volume = video[puid].volume
             adVideo.play()
+            // after ads video ended
             adVideo.addEventListener('ended', function() {
-              ads[puid].style.display = 'none'
-              singleAdStartElm.style.display = 'none'
+              ads[puid].style.display = 'none';
+              singleAdStartElm.style.display = 'none';
               video[puid].play()
             })
+
+            // skip button handler
             var skipTimer = setInterval(function() {
               counter--
               if (counter === 0) {
                 clearInterval(skipTimer)
                 skipBtnElm.innerHTML = "Skip Now"
+
+                // click on skip button
                 skipBtnElm.addEventListener('click', function() {
                   adVideo.pause()
                   adVideo.currentTime = 0
@@ -155,10 +173,13 @@
                   singleAdStartElm.style.display = 'none'
                   video[puid].play()
                 })
+
               } else {
                 skipBtnElm.innerHTML = "Skip " + counter + "s"
               }
             }, 1000)
+
+
           }
         }
       }
@@ -173,6 +194,7 @@
             if (video[vuid].paused || video[vuid].ended) {
               playpause[vuid].setAttribute('data-state', 'play');
             } else {
+              pausedByAd = false;
               playpause[vuid].setAttribute('data-state', 'pause');
             }
           }
@@ -182,10 +204,46 @@
         video[i].addEventListener('play', function() {
           var vuid = this.getAttribute('data-uid')
           changeButtonState('playpause', vuid);
+
+          // play action
+          clearInterval(increaseTime[vuid])
+          var playTime = parseFloat(sessionStorage.getItem('playTime-' + vuid));
+          if (!playTime) {
+            video[vuid].currentTime = sals_liveTime[vuid];
+          } else {
+            video[vuid].currentTime = playTime;
+          }
+
+          checkAds[vuid] = setInterval(function() {
+            if (Math.floor(video[vuid].duration) > video[vuid].currentTime) {
+              adToggle('play', video[vuid].currentTime, vuid)
+            } else {
+              clearInterval(checkAds[vuid]);
+              return;
+            }
+          }, 1000);
+
+
         }, false);
+
         video[i].addEventListener('pause', function() {
           var vuid = this.getAttribute('data-uid')
           changeButtonState('playpause', vuid);
+          // pause action
+          clearInterval(checkAds[vuid]);
+          sals_liveTime[vuid] = video[vuid].currentTime;
+
+          if (!pausedByAd) {
+            increaseTime[vuid] = setInterval(function() {
+              if (Math.floor(video[vuid].duration) > sals_liveTime[vuid]) {
+                adToggle('pause', sals_liveTime[vuid], vuid)
+                sals_liveTime[vuid] += 1
+              } else {
+                clearInterval(increaseTime[vuid]);
+                return;
+              }
+            }, 1000)
+          }
         }, false);
 
         // Add events for all buttons
@@ -196,32 +254,8 @@
         playpause[i].addEventListener('click', function(e) {
           var puid = this.getAttribute("data-uid");
           if (video[puid].paused || video[puid].ended) {
-            // pause state
-            clearInterval(increaseTime[puid])
-            video[puid].currentTime = sals_liveTime[puid]
-            checkAds[puid] = setInterval(function() {
-              if (Math.floor(video[puid].duration) > video[puid].currentTime) {
-                adToggle(video[puid].currentTime, puid)
-              } else {
-                clearInterval(increaseTime[puid]);
-                return;
-              }
-            }, intervalTime)
             video[puid].play();
           } else {
-            // play state
-            clearInterval(checkAds[puid])
-            sals_liveTime[puid] = video[puid].currentTime
-
-            increaseTime[puid] = setInterval(function() {
-              if (Math.floor(video[puid].duration) > sals_liveTime[puid]) {
-                adToggle(sals_liveTime[puid], puid)
-                sals_liveTime[puid] += intervalTime / 1000
-              } else {
-                clearInterval(increaseTime[puid]);
-                return;
-              }
-            }, intervalTime)
             video[puid].pause();
           }
 

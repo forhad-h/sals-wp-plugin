@@ -7,8 +7,6 @@
   var shortcodeGenerateElm = document.querySelector('.sals_generate_btn');
   var serialNo = 0;
 
-
-
   addNewBtnElm.addEventListener('click', function() {
     serialNo++;
     return makeAdSection(serialNo);
@@ -165,5 +163,7 @@
     }
     return true;
   }
+
+
 
 })()
