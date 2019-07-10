@@ -1,6 +1,14 @@
 [sals-video
   main_video_url="http://localhost/wordpress/video/tears-of-steel-battle-clip-medium.mp4"
   main_video_poster="http://localhost/wordpress/img/poster.jpg"
+  video_start_time="2019-01-01T01:00"
+  video_placeholder="Coming soon..."
+  video_info="Some Info. about this video"
+  control_playpause="on"
+  control_sound="on"
+  control_volume="on"
+  control_live="on"
+  control_fullscreen="on"
   ad_video_urls="http://localhost/wordpress/video/movie.mp4, http://localhost/wordpress/video/movie.mp4"
   ad_start_times="1, 15"
 ]

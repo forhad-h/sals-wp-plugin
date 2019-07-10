@@ -43,14 +43,17 @@ figcaption {
   color: #fff;
 }
 
-video {
+/* controls */
+figure.sals_videoContainer {
   width: 100%;
-  vertical-align: middle;
+  position: relative;
+  margin-bottom: 10px !important;
 }
 
-/* controls */
-.sals_videoContainer {
+.sals_videoContainer video,
+.sals_videoContainer img {
   width: 100%;
+  vertical-align: middle;
 }
 
 .sals_video-controls, .sals_video-controls>* {
@@ -120,12 +123,17 @@ video {
   background-size: contain;
   background-repeat: no-repeat;
   display: block;
-  opacity: 0.4;
+  opacity: 0;
   background-size: 100%;
+  transition: 0.15s linear;
 }
 
-.sals_video-controls:hover button {
-  opacity: 0.8;
+.sals_videoContainer:hover .sals_video-controls button {
+  opacity: 0.5;
+}
+
+.sals_videoContainer:hover .sals_video-controls:hover button {
+  opacity: 1;
 }
 
 .sals_video-controls button:hover,
@@ -166,17 +174,39 @@ video {
   cursor: initial;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__icon {
+.sals_video-controls button.sals_volume .sals_volume__icon,
+.sals_video-controls button.sals_volume .sals_volume__icon[data-state="mute"] {
   background-image: url('../img/volume.png');
   width: 25px;
   height: 25px;
   margin-top: 5px;
   margin-left: 10px;
   display: block;
-  background-size: 100%;
+  background-size: contain;
   background-repeat: no-repeat;
   float: left;
   background-size: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.sals_video-controls button.sals_volume .sals_volume__icon[data-state="muted"] {
+  background-image: url('../img/mute.png');
+}
+
+.sals_unmute_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
 }
 
 .sals_video-controls button.sals_volume .sals_volume__controller {
@@ -184,7 +214,7 @@ video {
   width: 100px;
   height: 5px;
   background-color: #c73e07;
-  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.1);
   float: left;
   margin-top: 12px;
   margin-left: 10px;
@@ -401,13 +431,77 @@ button.sals__skip_btn {
   z-index: 99999999;
   cursor: pointer;
   transition: 0.2s ease-out;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  -o-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5)
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1)
 }
 
-button.sals__skip_btn:hover {
+button.sals__skip_btn:hover,
+button.sals__skip_btn:active,
+button.sals__skip_btn:focus {
   opacity: 1;
+  outline: none;
+}
+
+.sals_video_placeholder {
+  background: #63dd8d;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.sals_video_placeholder h2 {
+  color: #333;
+  font-weight: 300;
+  margin-top: 12px;
+  font-size: 1.8rem;
+}
+
+.sals_video_placeholder h2::before,
+.sals_video_placeholder h2::after {
+  display: none;
+}
+
+.sals_video_placeholder img {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sals_video_loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: #f6f6f6;
+  height: 100%;
+  z-index: 99999;
+}
+
+p.sals_video_info {
+  color: #555;
+  margin-top: 10px !important;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.sals_live_now {
+  float: right;
+  font-size: 0.8rem;
+  margin-right: 10px;
+  width: 40px;
+  text-align: right;
+  position: relative;
+  color: #FC3B00;
+}
+
+.sals_live_now::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #f00;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  left: -1px;
 }
