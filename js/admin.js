@@ -24,25 +24,33 @@
 
 
 
-  addNewBtnElm.addEventListener('click', function() {
-    serialNo++;
-    return makeAdSection(serialNo);
-  })
+  if (addNewBtnElm) {
+    addNewBtnElm.addEventListener('click', function() {
+      serialNo++;
+      return makeAdSection(serialNo);
+    });
+  }
 
-  shortcodeGenerateElm.addEventListener('click', function() {
-    return addShortcode();
-  })
+  if (shortcodeGenerateElm) {
+    shortcodeGenerateElm.addEventListener('click', function() {
+      return addShortcode();
+    })
+  }
 
-  shortcodeContainerElm.addEventListener('click', function() {
-    this.select();
-  })
+  if (shortcodeContainerElm) {
+    shortcodeContainerElm.addEventListener('click', function() {
+      this.select();
+    })
+  }
 
   var date = new Date();
   var DateTimeISONow = new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000)).toISOString();
   var DateTimeArr = DateTimeISONow.split(':');
   DateTimeArr.pop()
   DateTimeISONow = DateTimeArr.join(':')
-  videoStartDatetimeElm.value = DateTimeISONow;
+  if (videoStartDatetimeElm) {
+    videoStartDatetimeElm.value = DateTimeISONow;
+  }
 
   function makeAdSection(serial) {
     // make options elements
