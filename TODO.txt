@@ -1,1 +1,1 @@
-# remove database table for this plugin when uninstall
+# 

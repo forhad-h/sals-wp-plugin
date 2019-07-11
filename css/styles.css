@@ -353,7 +353,6 @@ figure[data-fullscreen=true] .sals_video-controls .progress {
     margin-left: 0;
     height: 40px;
     height: 2.5rem;
-    margin-top: 2.5rem;
   }
 
   .sals_video-controls .progress {
@@ -490,6 +489,7 @@ p.sals_video_info {
   font-size: 0.8rem;
   margin-right: 10px;
   width: 40px;
+  height: 25px;
   text-align: right;
   position: relative;
   color: #FC3B00;
@@ -503,5 +503,5 @@ p.sals_video_info {
   border-radius: 50%;
   position: absolute;
   top: 12px;
-  left: -1px;
+  left: -2px;
 }

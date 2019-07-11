@@ -7,25 +7,31 @@
   window.onload = function() {
 
     // play video based on current time
-    var playVideo = function(video) {
+    var playVideo = function(video, adDuration = 0) {
       var playTime = 0;
       var startTime = video.getAttribute('data-videostart');
-      var duration = video.duration;
 
       if (window.XMLHttpRequest) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState === 4 && this.status === 200) {
             playTime = this.responseText;
-            video.currentTime = parseInt(playTime);
+            video.currentTime = parseInt(playTime - adDuration);
             video.play();
           }
         }
-        // sals.pluginUrl comes from wp_localize_script function
-        var ajaxURL = 'get_play_time.php?starttime=' + startTime +
-          '&duration=' + duration;
-        xhttp.open("GET", sals.pluginUrl + ajaxURL, true);
-        xhttp.send();
+        // confirmMetaData for load metatada such as duration on mobile
+        var confirmMetaData = setInterval(function() {
+          if (video.readyState === 4) {
+            clearInterval(confirmMetaData);
+
+            var ajaxURL = 'get_play_time.php?starttime=' + startTime +
+              '&duration=' + video.duration;
+            xhttp.open("GET", sals.pluginUrl + ajaxURL, true); // sals.pluginUrl comes from wp_localize_script function
+            xhttp.send();
+          }
+        }, 200)
+
       }
     }
 
@@ -67,7 +73,6 @@
     for (var i = 0; i < videoContainer.length; i++) {
       // custom variables
       var hasFSClassName = 'sals_hasFullscreen';
-      var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
       // Hide the default controls
       video[i].controls = false;
@@ -217,8 +222,7 @@
       }
 
       if (i === 0) {
-        playVideo(video[i]);
-
+        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
         if (isChrome) {
           video[i].muted = true;
           unmuteBtn[i].style.display = 'block';
@@ -229,6 +233,7 @@
             volumeIcon[uid].setAttribute('data-state', 'unmuted')
           })
         }
+        playVideo(video[i]);
       }
     }
 
@@ -349,7 +354,7 @@
           adVideo.addEventListener('ended', function() {
             ads[uid].style.display = 'none';
             singleAdStartElm.style.display = 'none';
-            playVideo(video[uid]);
+            playVideo(video[uid], adVideo.duration);
           })
 
           // skip button handler
@@ -362,10 +367,10 @@
               // click on skip button
               skipBtnElm.addEventListener('click', function() {
                 adVideo.pause();
-                adVideo.currentTime = 0;
                 ads[uid].style.display = 'none';
                 singleAdStartElm.style.display = 'none';
-                playVideo(video[uid]);
+                playVideo(video[uid], adVideo.currentTime);
+                adVideo.currentTime = 0;
               })
 
             } else {

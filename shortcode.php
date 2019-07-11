@@ -25,7 +25,8 @@ function sals_video_shortcode($attr) {
     <div class="sals_video_loading"></div>
     <div class="sals_unmute_btn">Click to play sound</div>
     <div class="sals_video_main">
-      <video class="sals_video" controls preload="metadata" data-videostart="<?= $video_start_time; ?>" poster="<?= $main_video_poster;?> ">
+      <video class="sals_video" preload="metadata" data-videostart="<?= $video_start_time; ?>"
+        poster="<?= $main_video_poster;?> " >
         <source src="<?= $main_video_url; ?>" type="video/mp4">
       </video>
       <div class="sals_ads" style="display:none">
