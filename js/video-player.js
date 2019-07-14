@@ -97,15 +97,13 @@
       volumeController[i].addEventListener('click', function(e) {
         var uid = this.getAttribute('data-uid');
         var pointerElm = this.querySelector('.sals_volume__pointer');
-        var pos = (e.pageX - (this.offsetLeft + this.offsetParent.offsetParent.offsetParent.offsetLeft)) / this.offsetWidth;
-
-        video[uid].muted = false;
+        var pos = e.pageX - this.getBoundingClientRect().left;
         volumeIcon[uid].setAttribute('data-state', 'unmuted');
         unmuteBtn[uid].style.display = 'none';
 
-        if (pos < 1) {
-          video[uid].volume = pos;
-          pointerElm.style.left = (pos * 100) + "px"
+        if (pos) {
+          video[uid].volume = pos / 100;
+          pointerElm.style.left = pos + "px"
         }
       })
 

@@ -486,9 +486,9 @@ p.sals_video_info {
 
 .sals_live_now {
   float: right;
-  font-size: 0.8rem;
+  font-size: 16px;
   margin-right: 10px;
-  width: 40px;
+  width: 38px;
   height: 25px;
   text-align: right;
   position: relative;
@@ -502,6 +502,6 @@ p.sals_video_info {
   background: #f00;
   border-radius: 50%;
   position: absolute;
-  top: 12px;
-  left: -2px;
+  top: 11px;
+  left: 0;
 }
