@@ -38,7 +38,7 @@ function sals_frontend_scripts() {
   ));
 
   // load css for frontend
-  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css/styles.css', '1.1.1');
+  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css/styles.css', array(), '1.1.1');
 }
 // load scripts to backend
 add_action('admin_enqueue_scripts', 'sals_backend_scripts');
