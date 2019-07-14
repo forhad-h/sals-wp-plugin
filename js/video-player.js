@@ -25,9 +25,9 @@
           if (video.readyState === 4) {
             clearInterval(confirmMetaData);
 
-            var ajaxURL = 'get_play_time.php?starttime=' + startTime +
+            var ajaxURLFields = '?action=sals_play_time&starttime=' + startTime +
               '&duration=' + video.duration;
-            xhttp.open("GET", sals.pluginUrl + ajaxURL, true); // sals.pluginUrl comes from wp_localize_script function
+            xhttp.open("GET", sals.ajaxurl + ajaxURLFields, true); // sals.ajaxurl comes from wp_localize_script function
             xhttp.send();
           }
         }, 200)

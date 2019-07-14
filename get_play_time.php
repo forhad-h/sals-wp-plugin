@@ -1,5 +1,4 @@
 <?php
-
 $start_time = $_GET['starttime'];
 $duration = $_GET['duration'];
 $time_difference = time() - $start_time;
@@ -10,7 +9,5 @@ if($time_difference < $duration) {
 }else {
   $play_time = $time_difference % $duration;
 }
-
 echo $play_time;
-
 ?>
