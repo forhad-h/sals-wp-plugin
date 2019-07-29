@@ -84,6 +84,10 @@ figure.sals_videoContainer {
   transition: 0.25s linear;
   border-radius: 10px;
   z-index: 9999;
+  -webkit-box-sizeing: border-box;
+  -moz-box-sizeing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .sals_video-controls[data-state=hidden] {
@@ -493,6 +497,7 @@ p.sals_video_info {
   text-align: right;
   position: relative;
   color: #FC3B00;
+  line-height: 1.8;
 }
 
 .sals_live_now::before {
@@ -504,4 +509,11 @@ p.sals_video_info {
   position: absolute;
   top: 11px;
   left: 0;
+}
+
+.sals_priview_container {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }

@@ -2,23 +2,27 @@
 add_shortcode('sals-video', 'sals_video_shortcode');
 function sals_video_shortcode($attr) {
   extract(shortcode_atts(array(
-    'main_video_url' => plugin_dir_url(__FILE__).'video/tears-of-steel-battle-clip-medium.mp4',
-    'main_video_poster' => plugin_dir_url(__FILE__).'img/poster.jpg',
-    'video_start_time' => "2562721120",
+    'main_video_url' => '',
+    'main_video_poster' => '',
+    'video_start_time' => "",
     'video_placeholder' => "Coming soon...",
     'video_info' => 'Some Info. about this video',
-    'control_playpause' => 'off',
-    'control_sound' => 'off',
-    'control_volume' => 'off',
-    'control_live' => 'off',
-    'control_fullscreen' => 'off',
-    'ad_video_urls' => plugin_dir_url(__FILE__).'video/movie.mp4',
+    'control_playpause' => false,
+    'control_sound' => false,
+    'control_volume' => false,
+    'control_live' => false,
+    'control_fullscreen' => false,
+    'ad_video_urls' => '',
     'ad_start_times' => 3,
   ), $attr));
 
   $ad_video_urls_arr = explode(',', $ad_video_urls);
   $ad_start_times_arr = explode(',', $ad_start_times);
   ob_start();
+  $isPreviewPage = preg_match('/sals-preview-page/', $_SERVER['REQUEST_URI']);
+  if($isPreviewPage) {
+    $video_start_time = time();
+  }
   if($video_start_time <= time()) :
 ?>
   <figure class="sals_videoContainer" data-fullscreen="false">
@@ -47,20 +51,20 @@ function sals_video_shortcode($attr) {
       </div>
       <div class="sals_video-controls" data-state="hidden">
         <button class="sals_playpause" type="button" data-state="play"
-        style="display: <?= $control_playpause === 'on' ? 'block' : 'none';?>">
+        style="display: <?= $control_playpause === 'true' ? 'block' : 'none';?>">
         Play/Pause</button>
         <button class="sals_volume" type="button">
           <span class="sals_volume__icon" data-state="muted"
-          style="display: <?= $control_sound === 'on' ? 'block' : 'none';?>"></span>
+          style="display: <?= $control_sound === 'true' ? 'block' : 'none';?>"></span>
           <span class="sals_volume__controller"
-          style="display: <?= $control_volume === 'on' ? 'block' : 'none';?>">
+          style="display: <?= $control_volume === 'true' ? 'block' : 'none';?>">
             <span class="sals_volume__pointer"></span>
           </span>
         </button>
         <button class="sals_fs" type="button" data-state="go-fullscreen"
-        style="display: <?= $control_live === 'on' ? 'block' : 'none';?>">Fullscreen</button>
+        style="display: <?= $control_fullscreen === 'true' ? 'block' : 'none';?>">Fullscreen</button>
         <div class="sals_live_now"
-        style="display: <?= $control_fullscreen === 'on' ? 'block' : 'none';?>">Live</div>
+        style="display: <?= $control_live === 'true' ? 'block' : 'none';?>">Live</div>
       </div>
     </div>
   </figure>

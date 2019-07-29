@@ -34,6 +34,9 @@
   background: #ddd;
   padding: 20px;
   border-radius: 5px;
+  position: fixed;
+  right: 20px;
+  width: 370px;
 }
 
 .sals_shortcode_container {
@@ -96,7 +99,8 @@
 
 .sals_new_ad_btn,
 .sals_submit_btn,
-.sals_generate_btn {
+.sals_generate_btn,
+.sals_preview_btn {
   background: #00bb3f;
   border: 0 none;
   padding: 7px 14px;
@@ -108,10 +112,12 @@
   cursor: pointer;
   margin-right: 15px;
   transition: 0.25s linear;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .sals_submit_btn_wrapper {
-  margin-top: 50px;
+  display: inline-block;
   text-align: right;
 }
 
@@ -120,8 +126,20 @@
   background: #06799f;
 }
 
-.sals_generate_btn {
+.sals_generate_btn,
+.sals_preview_btn {
   background: #0679a0;
+}
+
+.sals_preview_btn {
+  margin-top: 12px;
+}
+
+.sals_preview_btn:hover,
+.sals_preview_btn:active,
+.sals_preview_btn:focus {
+  color: #eee;
+  text-decoration: none;
 }
 
 .sals_submit_btn[disabled] {

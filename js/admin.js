@@ -5,7 +5,7 @@
   var adsWrapper = document.querySelector('.sals_ads_wrapper');
   var shortcodeContainerElm = document.querySelector('.sals_shortcode_container');
   var shortcodeGenerateElm = document.querySelector('.sals_generate_btn');
-
+  var previewButton = document.querySelector('.sals_preview_btn');
 
   var mainVideoURLElm = document.getElementById('main_video_url');
   var mainVideoPosterElm = document.getElementById('main_video_poster');
@@ -22,8 +22,6 @@
 
   var serialNo = 0;
 
-
-
   if (addNewBtnElm) {
     addNewBtnElm.addEventListener('click', function() {
       serialNo++;
@@ -35,6 +33,14 @@
     shortcodeGenerateElm.addEventListener('click', function() {
       return addShortcode();
     })
+  }
+  if (previewButton) {
+    previewButton.addEventListener('click', function() {
+      var attr = getAttr();
+      if (validateInput(attr)) {
+        window.open(getPrivewLink(attr), '_blank');
+      } else return;
+    });
   }
 
   if (shortcodeContainerElm) {
@@ -78,6 +84,11 @@
     urlInputClassAttr.value = 'sals_ad_url'
     urlInput.setAttributeNode(urlInputClassAttr)
 
+
+    var urlInputRequiredAttr = document.createAttribute('data-required')
+    urlInputRequiredAttr.value = 'true'
+    urlInput.setAttributeNode(urlInputRequiredAttr)
+
     // start time title
     var startTimeTitle = document.createElement('h4')
     var startTimeTitleText = document.createTextNode("Ad's start time (in second) *")
@@ -94,6 +105,10 @@
     var startTimeInputClassAttr = document.createAttribute('class')
     startTimeInputClassAttr.value = 'sals_ad_start_time'
     startTimeInput.setAttributeNode(startTimeInputClassAttr)
+
+    var startTimeInputRequiredAttr = document.createAttribute('data-required')
+    startTimeInputRequiredAttr.value = 'true'
+    startTimeInput.setAttributeNode(startTimeInputRequiredAttr)
 
     // close button
     var closeButton = document.createElement('button');
@@ -125,52 +140,7 @@
   }
 
   function addShortcode() {
-
-    var singleAdElms = document.querySelectorAll('.sals_single_ad');
-
-    // variables for shortcode values
-    var mainVideoURL = '';
-    var mainVideoPoster = '';
-    var adsVideoURLs = [];
-    var adsVideoStartTimes = [];
-
-    mainVideoURL = mainVideoURLElm.value;
-    mainVideoPoster = mainVideoPosterElm.value;
-    videoStartDatetime = new Date(videoStartDatetimeElm.value).getTime() / 1000;
-    videoPlaceholder = videoPlaceholderElm.value;
-    videoInfo = videoInfoElm.value;
-    controlPlaypause = controlPlaypauseElm.value;
-    controlSound = controlSoundElm.value;
-    controlVolume = controlVolumeElm.value;
-    controlLive = controlLiveElm.value;
-    controlFullscreen = controlFullscreenElm.value;
-
-    for (var j = 0; j < singleAdElms.length; j++) {
-      var adURLElm = singleAdElms[j].querySelector('.sals_ad_url');
-      var adStartTimeElm = singleAdElms[j].querySelector('.sals_ad_start_time');
-      if (adURLElm.value) {
-        adsVideoURLs.push(adURLElm.value)
-      }
-      if (adStartTimeElm.value) {
-        adsVideoStartTimes.push(adStartTimeElm.value)
-      }
-    }
-
-    var attr = {
-      mUrl: mainVideoURL,
-      mPoster: mainVideoPoster,
-      vStart: videoStartDatetime,
-      vPlaceholder: videoPlaceholder,
-      vInfo: videoInfo,
-      cPP: controlPlaypause,
-      cSound: controlSound,
-      cVolume: controlVolume,
-      cLive: controlLive,
-      cFs: controlFullscreen,
-      aUrls: adsVideoURLs,
-      aStarts: adsVideoStartTimes
-    }
-
+    var attr = getAttr();
     shortcodeContainerElm.value = generateShortcode(attr);
   }
 
@@ -199,6 +169,76 @@
     return '';
   }
 
+
+  function getPrivewLink(attr) {
+    var mUrl = encodeURIComponent(attr.mUrl) || '%27%27'
+    var link = '';
+    link += sals.previewPage;
+    link += '?main_video_url=' + (encodeURIComponent(attr.mUrl) || '%27%27');
+    link += '&main_video_poster=' + (encodeURIComponent(attr.mPoster) || '%27%27');
+    link += '&video_start_time=' + (attr.vStart || '%27%27');
+    link += '&video_placeholder=' + (attr.vPlaceholder || '%27%27');
+    link += '&video_info=' + (attr.vInfo || '%27%27');
+    link += '&control_playpause=' + (attr.cPP || false);
+    link += '&control_sound=' + (attr.cSound || false);
+    link += '&control_volume=' + (attr.cVolume || false);
+    link += '&control_live=' + (attr.cLive || false);
+    link += '&control_fullscreen=' + (attr.cFs || false);
+    link += '&ad_video_urls=' + (encodeURIComponent(attr.aUrls) || '%27%27');
+    link += '&ad_start_times=' + (attr.aStarts || '%27%27');
+
+    return link + "/";
+  }
+
+  function getAttr() {
+
+    var singleAdElms = document.querySelectorAll('.sals_single_ad');
+
+    // variables for shortcode values
+    var mainVideoURL = '';
+    var mainVideoPoster = '';
+    var adsVideoURLs = [];
+    var adsVideoStartTimes = [];
+
+    mainVideoURL = mainVideoURLElm.value;
+    mainVideoPoster = mainVideoPosterElm.value;
+    videoStartDatetime = new Date(videoStartDatetimeElm.value).getTime() / 1000;
+    videoPlaceholder = videoPlaceholderElm.value;
+    videoInfo = videoInfoElm.value;
+    controlPlaypause = controlPlaypauseElm.checked;
+    controlSound = controlSoundElm.checked;
+    controlVolume = controlVolumeElm.checked;
+    controlLive = controlLiveElm.checked;
+    controlFullscreen = controlFullscreenElm.checked;
+
+    for (var j = 0; j < singleAdElms.length; j++) {
+      var adURLElm = singleAdElms[j].querySelector('.sals_ad_url');
+      var adStartTimeElm = singleAdElms[j].querySelector('.sals_ad_start_time');
+      if (adURLElm.value) {
+        adsVideoURLs.push(adURLElm.value)
+      }
+      if (adStartTimeElm.value) {
+        adsVideoStartTimes.push(adStartTimeElm.value)
+      }
+    }
+
+    return {
+      mUrl: mainVideoURL,
+      mPoster: mainVideoPoster,
+      vStart: videoStartDatetime,
+      vPlaceholder: videoPlaceholder,
+      vInfo: videoInfo,
+      cPP: controlPlaypause,
+      cSound: controlSound,
+      cVolume: controlVolume,
+      cLive: controlLive,
+      cFs: controlFullscreen,
+      aUrls: adsVideoURLs,
+      aStarts: adsVideoStartTimes
+    }
+
+  }
+
   function validateInput(attr) {
     // just checking is any field value is empty
     var singleAdElm = document.querySelectorAll('.sals_single_ad');
@@ -214,7 +254,9 @@
 
       for (var i = 0; i < allInputs.length; i++) {
         if (!allInputs[i].value) {
-          allInputs[i].classList.add('sals_error_field')
+          if (allInputs[i].getAttribute('data-required') === 'true') {
+            allInputs[i].classList.add('sals_error_field')
+          }
         }
 
         allInputs[i].addEventListener('input', function() {

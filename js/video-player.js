@@ -10,6 +10,14 @@
     var playVideo = function(video, adDuration = 0) {
       var playTime = 0;
       var startTime = video.getAttribute('data-videostart');
+      var playerScriptElm = document.getElementById('sals_video_player_prev_script');
+      var ajaxurl = '';
+      if (playerScriptElm) {
+        ajaxurl = decodeURI(playerScriptElm.src).split('ajaxUrl=')[1].split('&')[0];
+
+      } else {
+        ajaxurl = sals.ajaxurl;
+      }
 
       if (window.XMLHttpRequest) {
         var xhttp = new XMLHttpRequest();
@@ -27,7 +35,7 @@
 
             var ajaxURLFields = '?action=sals_play_time&starttime=' + startTime +
               '&duration=' + video.duration;
-            xhttp.open("GET", sals.ajaxurl + ajaxURLFields, true); // sals.ajaxurl comes from wp_localize_script function
+            xhttp.open("GET", ajaxurl + ajaxURLFields, true); // sals.ajaxurl comes from wp_localize_script function
             xhttp.send();
           }
         }, 200)
