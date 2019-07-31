@@ -225,6 +225,16 @@
           loadingElm[uid].style.display = 'none';
         })
 
+        video[i].addEventListener('click', function() {
+          var uid = this.getAttribute("data-uid");
+          if (video[uid].paused || video[uid].ended) {
+            playVideo(video[uid]);
+          } else {
+            video[uid].pause();
+          }
+        })
+
+
         // Add events for all buttons
         sals_liveTime.push(0);
         increaseTime.push('');
