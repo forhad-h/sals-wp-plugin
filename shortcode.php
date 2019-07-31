@@ -26,7 +26,10 @@ function sals_video_shortcode($attr) {
   if($video_start_time <= time()) :
 ?>
   <figure class="sals_videoContainer" data-fullscreen="false">
-    <div class="sals_video_loading"></div>
+    <div class="sals_video_loading" style="display: none">
+      <img src="<?= plugin_dir_url(__FILE__).'img/loading.gif';?>">
+    </div>
+    <div class="play_pause_animation animate_focus" data-icon="play" style="display: none"></div>
     <div class="sals_unmute_btn">Click to play sound</div>
     <div class="sals_video_main">
       <video class="sals_video" preload="metadata" data-videostart="<?= $video_start_time; ?>"

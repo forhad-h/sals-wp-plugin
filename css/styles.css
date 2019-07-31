@@ -202,14 +202,14 @@ figure.sals_videoContainer {
   position: absolute;
   top: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 200, 0.5);
   z-index: 9999;
   width: 100%;
   height: 100%;
   text-align: center;
   padding: 2rem;
   font-size: 1.5rem;
-  color: #000;
+  color: #eee;
   cursor: pointer;
 }
 
@@ -217,7 +217,7 @@ figure.sals_videoContainer {
   display: block;
   width: 100px;
   height: 5px;
-  background-color: #c73e07;
+  background-color: #eee;
   box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.1);
   float: left;
   margin-top: 12px;
@@ -231,7 +231,7 @@ figure.sals_videoContainer {
   width: 15px;
   height: 13px;
   border-radius: 50%;
-  background-color: #c73e07;
+  background-color: #eee;
   position: absolute;
   left: 40px;
   top: -4px;
@@ -473,12 +473,21 @@ button.sals__skip_btn:focus {
 
 .sals_video_loading {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background: #f6f6f6;
-  height: 100%;
+  left: 43%;
+  top: 36%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
   z-index: 99999;
+}
+
+.sals_video_loading img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  -webkit-transfrom: scale(1.1);
+  transform: scale(1.1)
 }
 
 p.sals_video_info {
@@ -496,7 +505,7 @@ p.sals_video_info {
   height: 25px;
   text-align: right;
   position: relative;
-  color: #FC3B00;
+  color: #eee;
   line-height: 1.8;
 }
 
@@ -516,4 +525,60 @@ p.sals_video_info {
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
+}
+
+.play_pause_animation {
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  left: 39%;
+  top: 30%;
+  z-index: 99999;
+}
+
+.play_pause_animation[data-icon=play] {
+  background-image: url('../img/play.png')
+}
+
+.play_pause_animation[data-icon=pause] {
+  background-image: url('../img/pause.png')
+}
+
+.loading {
+  background-image: url('../img/loading.gif')
+}
+
+.animate_focus {
+  -webkit-animation-name: animate_focus;
+  animation-name: animate_focus;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+@-webkit-keyframes {
+  0% {
+    opacity: 1;
+    -webkit-transfrom: scale(1.2);
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transfrom: scale(1);
+    transform: scale(0.5);
+  }
+}
+
+@keyframes animate_focus {
+  0% {
+    opacity: 1;
+    -webkit-transfrom: scale(1.2);
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transfrom: scale(1);
+    transform: scale(0.5);
+  }
 }

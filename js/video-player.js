@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-  var loadingElm = document.querySelector('.sals_video_loading');
 
 
   window.onload = function() {
@@ -60,6 +59,9 @@
     var unmuteBtn = document.querySelectorAll('.sals_unmute_btn');
     var volumeIcon = document.querySelectorAll('.sals_volume__icon');
 
+    var playPauseAnimationElm = document.querySelectorAll('.play_pause_animation');
+    var loadingElm = document.querySelectorAll('.sals_video_loading');
+
     // Obtain handles to Ads buttons
     var ads = document.querySelectorAll('.sals_ads');
 
@@ -68,6 +70,7 @@
       checkAds = [],
       pausedByAd = false;
 
+    // put data-uid i.e unique id for those elements
     for (var uid = 0; uid < videoContainer.length; uid++) {
       videoContainer[uid].setAttribute('data-uid', uid);
       unmuteBtn[uid].setAttribute('data-uid', uid);
@@ -76,6 +79,8 @@
       playpause[uid].setAttribute('data-uid', uid);
       volumeController[uid].setAttribute('data-uid', uid);
       fullscreen[uid].setAttribute('data-uid', uid);
+      playPauseAnimationElm[uid].setAttribute('data-uid', uid);
+      loadingElm[uid].setAttribute('data-uid', uid);
     }
 
     for (var i = 0; i < videoContainer.length; i++) {
@@ -87,9 +92,6 @@
       video[i].volume = 0.5;
       unmuteBtn[i].style.display = 'none';
 
-
-      // hide loading
-      loadingElm.style.display = 'none';
 
       videoContainer[i].oncontextmenu = function() {
         return false;
@@ -142,9 +144,17 @@
 
         // Add event listeners for video specific events
         video[i].addEventListener('play', function() {
-          var uid = this.getAttribute('data-uid')
-          changeButtonState('playpause', uid);
+          var uid = this.getAttribute('data-uid');
 
+          loadingElm[uid].style.display = 'none';
+          // play pause animation
+          playPauseAnimationElm[uid].setAttribute('data-icon', 'play');
+          playPauseAnimationElm[uid].style.display = 'block';
+          setTimeout(function() {
+            playPauseAnimationElm[uid].style.display = 'none'
+          }, 1000)
+
+          changeButtonState('playpause', uid);
           // play action
           clearInterval(increaseTime[uid])
 
@@ -170,6 +180,15 @@
 
         video[i].addEventListener('pause', function() {
           var uid = this.getAttribute('data-uid');
+
+          loadingElm[uid].style.display = 'none';
+          // play pause animation
+          playPauseAnimationElm[uid].setAttribute('data-icon', 'pause');
+          playPauseAnimationElm[uid].style.display = 'block';
+          setTimeout(function() {
+            playPauseAnimationElm[uid].style.display = 'none'
+          }, 1000);
+
           changeButtonState('playpause', uid);
 
           // pause action
@@ -192,6 +211,18 @@
         video[i].addEventListener('ended', function() {
           var uid = this.getAttribute('data-uid');
           playVideo(video[uid]);
+        })
+
+        video[i].addEventListener('waiting', function() {
+          var uid = this.getAttribute('data-uid');
+          // loading animation
+          loadingElm[uid].style.display = 'block';
+        })
+
+        video[i].addEventListener('playing', function() {
+          var uid = this.getAttribute('data-uid');
+          // loading animation
+          loadingElm[uid].style.display = 'none';
         })
 
         // Add events for all buttons
