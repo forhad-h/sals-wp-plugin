@@ -563,7 +563,7 @@ p.sals_video_info {
   animation-duration: 1s;
 }
 
-@-webkit-keyframes {
+@keyframes animate_focus {
   0% {
     opacity: 1;
     -webkit-transfrom: scale(1.2);
@@ -577,7 +577,7 @@ p.sals_video_info {
   }
 }
 
-@keyframes animate_focus {
+@-webkit-keyframes animate_focus {
   0% {
     opacity: 1;
     -webkit-transfrom: scale(1.2);

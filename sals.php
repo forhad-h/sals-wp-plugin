@@ -3,13 +3,13 @@
 * Plugin Name: SaLS
 * Plugin URI: https://github.com/forhad-h/sals-wp-plugin
 * Description: SaLS (Static as Live Streaming) is a wordpress plugin for play static video like live video streaming with 'video Ads'
-* Version: 1.2.2
+* Version: 1.2.3
 * Author: Forhad Hosain
 **/
 require_once 'shortcode.php';
 define('SALS_PREVIEW_PAGE_NAME', 'sals-preview-page.php');
 define('PREVIEW_PAGE', ABSPATH.SALS_PREVIEW_PAGE_NAME);
-define('SALS_VERSION', '1.2.2');
+define('SALS_VERSION', '1.2.3');
 
 // when plugin activate_plugin
 register_activation_hook(__FILE__, 'create_sals_priview_page');
