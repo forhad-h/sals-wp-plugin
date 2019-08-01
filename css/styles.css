@@ -480,6 +480,7 @@ button.sals__skip_btn:focus {
   border-radius: 50%;
   overflow: hidden;
   z-index: 99999;
+  opacity: 0.5;
 }
 
 .sals_video_loading img {

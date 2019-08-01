@@ -3,12 +3,13 @@
 * Plugin Name: SaLS
 * Plugin URI: https://github.com/forhad-h/sals-wp-plugin
 * Description: SaLS (Static as Live Streaming) is a wordpress plugin for play static video like live video streaming with 'video Ads'
-* Version: 1.1.2
+* Version: 1.2.1
 * Author: Forhad Hosain
 **/
 require_once 'shortcode.php';
 define('SALS_PREVIEW_PAGE_NAME', 'sals-preview-page.php');
 define('PREVIEW_PAGE', ABSPATH.SALS_PREVIEW_PAGE_NAME);
+define('SALS_VERSION', '1.2.1');
 
 // when plugin activate_plugin
 register_activation_hook(__FILE__, 'create_sals_priview_page');
@@ -38,24 +39,24 @@ if ( is_admin() ){
 add_action('wp_enqueue_scripts', 'sals_frontend_scripts');
 function sals_frontend_scripts() {
   // load js for video player
-  wp_enqueue_script('sals-video-player', plugin_dir_url(__FILE__).'js/video-player.js', array(), '1.1.2', true);
+  wp_enqueue_script('sals-video-player', plugin_dir_url(__FILE__).'js/video-player.js', array(), SALS_VERSION, true);
   wp_localize_script('sals-video-player', 'sals', array(
     'ajaxurl' => admin_url('admin-ajax.php'),
   ));
 
   // load css for frontend
-  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css/styles.css', array(), '1.1.2');
+  wp_enqueue_style('sals-styles-frontend', plugin_dir_url(__FILE__).'css/styles.css', array(), SALS_VERSION);
 }
 // load scripts to backend
 add_action('admin_enqueue_scripts', 'sals_backend_scripts');
 function sals_backend_scripts() {
   // load admin js fro custom operation
-  wp_enqueue_script('sals-admin-js', plugin_dir_url(__FILE__).'js/admin.js', array(), '1.1.0', true);
+  wp_enqueue_script('sals-admin-js', plugin_dir_url(__FILE__).'js/admin.js', array(), SALS_VERSION, true);
   wp_localize_script('sals-admin-js', 'sals', array(
     'previewPage' => esc_url(site_url(SALS_PREVIEW_PAGE_NAME))
   ));
   // load css for admin frontend
-  wp_enqueue_style('sals-admin-css', plugin_dir_url(__FILE__).'css/admin.css', array(), '1.1.1');
+  wp_enqueue_style('sals-admin-css', plugin_dir_url(__FILE__).'css/admin.css', array(), SALS_VERSION);
 }
 
 // ajax request
