@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -7,7 +8,8 @@ html, body {
 
 body {
   color: #666;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", Lucida, Arial, Helvetica, sans-serif;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', Lucida,
+    Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -24,14 +26,17 @@ a {
   text-decoration: none;
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: #2255aa;
   text-decoration: underline;
 }
 
 figure {
   width: 100%;
+  max-width: 100%;
   height: auto;
+  max-height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -56,7 +61,8 @@ figure.sals_videoContainer {
   vertical-align: middle;
 }
 
-.sals_video-controls, .sals_video-controls>* {
+.sals_video-controls,
+.sals_video-controls > * {
   padding: 0;
   margin: 0;
 }
@@ -90,15 +96,15 @@ figure.sals_videoContainer {
   box-sizing: border-box;
 }
 
-.sals_video-controls[data-state=hidden] {
+.sals_video-controls[data-state='hidden'] {
   display: none;
 }
 
-.sals_video-controls[data-state=visible] {
+.sals_video-controls[data-state='visible'] {
   display: block;
 }
 
-.sals_video-controls>* {
+.sals_video-controls > * {
   float: left;
   width: 3.90625%;
   height: 100%;
@@ -106,7 +112,7 @@ figure.sals_videoContainer {
   display: block;
 }
 
-.sals_video-controls>*:first-child {
+.sals_video-controls > *:first-child {
   margin-left: 0;
 }
 
@@ -148,21 +154,21 @@ figure.sals_videoContainer {
   outline: none;
 }
 
-.sals_video-controls button[data-state="play"] {
+.sals_video-controls button[data-state='play'] {
   background-image: url('../img/player_play.png');
   width: 30px;
   height: 30px;
   background-size: 100%;
 }
 
-.sals_video-controls button[data-state="pause"] {
+.sals_video-controls button[data-state='pause'] {
   background-image: url('../img/player_pause.png');
   width: 30px;
   height: 30px;
   background-size: 100%;
 }
 
-.sals_video-controls button[data-state="go-fullscreen"] {
+.sals_video-controls button[data-state='go-fullscreen'] {
   background-image: url('../img/fullscreen.png');
   width: 20px;
   height: 20px;
@@ -179,7 +185,7 @@ figure.sals_videoContainer {
 }
 
 .sals_video-controls button.sals_volume .sals_volume__icon,
-.sals_video-controls button.sals_volume .sals_volume__icon[data-state="mute"] {
+.sals_video-controls button.sals_volume .sals_volume__icon[data-state='mute'] {
   background-image: url('../img/volume.png');
   width: 25px;
   height: 25px;
@@ -194,7 +200,7 @@ figure.sals_videoContainer {
   position: relative;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__icon[data-state="muted"] {
+.sals_video-controls button.sals_volume .sals_volume__icon[data-state='muted'] {
   background-image: url('../img/mute.png');
 }
 
@@ -237,7 +243,7 @@ figure.sals_videoContainer {
   top: -4px;
 }
 
-.sals_video-controls button[data-state="cancel-fullscreen"] {
+.sals_video-controls button[data-state='cancel-fullscreen'] {
   background-image: url('../img/exitfullscreen.png');
   width: 20px;
   height: 20px;
@@ -262,7 +268,7 @@ figure.sals_videoContainer {
   /* Internet Explorer uses this value as the progress bar's value colour */
 }
 
-.sals_video-controls progress[data-state="fake"] {
+.sals_video-controls progress[data-state='fake'] {
   background: #e6e6e6;
   height: 65%;
 }
@@ -292,21 +298,21 @@ html:-ms-fullscreen {
   background-color: transparent;
 }
 
-video:-webkit-full-screen+.sals_video-controls {
+video:-webkit-full-screen + .sals_video-controls {
   background: #ccc;
   /* required for Chrome which doesn't heed the transparent value set above */
 }
 
-video:-webkit-full-screen+.sals_video-controls progress {
+video:-webkit-full-screen + .sals_video-controls progress {
   margin-top: 0.5rem;
 }
 
 /* hide controls on fullscreen with WebKit */
-figure[data-fullscreen=true] video::-webkit-media-controls {
+figure[data-fullscreen='true'] video::-webkit-media-controls {
   display: none !important;
 }
 
-figure[data-fullscreen=true] {
+figure[data-fullscreen='true'] {
   max-width: 100%;
   width: 100%;
   margin: 0;
@@ -314,31 +320,31 @@ figure[data-fullscreen=true] {
   max-height: 100%;
 }
 
-figure[data-fullscreen=true] video {
+figure[data-fullscreen='true'] video {
   height: auto;
 }
 
-figure[data-fullscreen=true] figcaption {
+figure[data-fullscreen='true'] figcaption {
   display: none;
 }
 
-figure[data-fullscreen=true] .sals_video-controls {
+figure[data-fullscreen='true'] .sals_video-controls {
   position: absolute;
   bottom: 5px;
   left: 0;
   z-index: 9999;
 }
 
-figure[data-fullscreen=true] .sals_video-controls li {
+figure[data-fullscreen='true'] .sals_video-controls li {
   width: 5%;
 }
 
-figure[data-fullscreen=true] .sals_video-controls .progress {
+figure[data-fullscreen='true'] .sals_video-controls .progress {
   width: 68%;
 }
 
 /* Media Queries */
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
   figure {
     padding-left: 0;
     padding-right: 0;
@@ -346,12 +352,12 @@ figure[data-fullscreen=true] .sals_video-controls .progress {
   }
 }
 
-@media screen and (max-width:42.5em) {
+@media screen and (max-width: 42.5em) {
   .sals_video-controls {
     height: auto;
   }
 
-  .sals_video-controls>* {
+  .sals_video-controls > * {
     display: block;
     width: 16.6667%;
     margin-left: 0;
@@ -385,7 +391,8 @@ figure[data-fullscreen=true] .sals_video-controls .progress {
 }
 
 /*General styles*/
-button:active, button:focus {
+button:active,
+button:focus {
   outline: none;
 }
 
@@ -438,7 +445,7 @@ button.sals__skip_btn {
   -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   -o-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1)
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 button.sals__skip_btn:hover,
@@ -488,7 +495,7 @@ button.sals__skip_btn:focus {
   height: 80px;
   border-radius: 50%;
   -webkit-transfrom: scale(1.1);
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
 p.sals_video_info {
@@ -511,7 +518,7 @@ p.sals_video_info {
 }
 
 .sals_live_now::before {
-  content: "";
+  content: '';
   width: 6px;
   height: 6px;
   background: #f00;
@@ -537,16 +544,16 @@ p.sals_video_info {
   z-index: 99999;
 }
 
-.play_pause_animation[data-icon=play] {
-  background-image: url('../img/play.png')
+.play_pause_animation[data-icon='play'] {
+  background-image: url('../img/play.png');
 }
 
-.play_pause_animation[data-icon=pause] {
-  background-image: url('../img/pause.png')
+.play_pause_animation[data-icon='pause'] {
+  background-image: url('../img/pause.png');
 }
 
 .loading {
-  background-image: url('../img/loading.gif')
+  background-image: url('../img/loading.gif');
 }
 
 .animate_focus {
