@@ -1,11 +1,11 @@
 !(function() {
   // variables fro required elements
-  var addWrapperElm = document.querySelector('.sals_ads_wrapper');
-  var addNewBtnElm = document.querySelector('.sals_new_ad_btn');
-  var adsWrapper = document.querySelector('.sals_ads_wrapper');
-  var shortcodeContainerElm = document.querySelector('.sals_shortcode_container');
-  var shortcodeGenerateElm = document.querySelector('.sals_generate_btn');
-  var previewButton = document.querySelector('.sals_preview_btn');
+  var addWrapperElm = document.querySelector('.vs_ads_wrapper');
+  var addNewBtnElm = document.querySelector('.vs_new_ad_btn');
+  var adsWrapper = document.querySelector('.vs_ads_wrapper');
+  var shortcodeContainerElm = document.querySelector('.vs_shortcode_container');
+  var shortcodeGenerateElm = document.querySelector('.vs_generate_btn');
+  var previewButton = document.querySelector('.vs_preview_btn');
 
   var mainVideoURLElm = document.getElementById('main_video_url');
   var mainVideoPosterElm = document.getElementById('main_video_poster');
@@ -17,7 +17,6 @@
   var controlPlaypauseElm = document.getElementById('control_playpause');
   var controlSoundElm = document.getElementById('control_sound');
   var controlVolumeElm = document.getElementById('control_volume');
-  var controlLiveElm = document.getElementById('control_live');
   var controlFullscreenElm = document.getElementById('control_fullscreen');
 
   var serialNo = 0;
@@ -64,7 +63,7 @@
     // single ad wrapper
     var singleAd = document.createElement('div')
     var singleAdClassAttr = document.createAttribute('class')
-    singleAdClassAttr.value = 'sals_single_ad'
+    singleAdClassAttr.value = 'vs_single_ad'
     singleAd.setAttributeNode(singleAdClassAttr)
 
     // url title
@@ -78,10 +77,10 @@
     urlInputTypeAttr.value = 'text'
     urlInput.setAttributeNode(urlInputTypeAttr)
     var urlInputNameAttr = document.createAttribute('name')
-    urlInputNameAttr.value = 'sals_ad_url[]'
+    urlInputNameAttr.value = 'vs_ad_url[]'
     urlInput.setAttributeNode(urlInputNameAttr)
     var urlInputClassAttr = document.createAttribute('class')
-    urlInputClassAttr.value = 'sals_ad_url'
+    urlInputClassAttr.value = 'vs_ad_url'
     urlInput.setAttributeNode(urlInputClassAttr)
 
 
@@ -100,10 +99,10 @@
     startTimeInputTypeAttr.value = 'number'
     startTimeInput.setAttributeNode(startTimeInputTypeAttr)
     var startTimeInputNameAttr = document.createAttribute('name')
-    startTimeInputNameAttr.value = 'sals_ad_start_time[]'
+    startTimeInputNameAttr.value = 'vs_ad_start_time[]'
     startTimeInput.setAttributeNode(startTimeInputNameAttr)
     var startTimeInputClassAttr = document.createAttribute('class')
-    startTimeInputClassAttr.value = 'sals_ad_start_time'
+    startTimeInputClassAttr.value = 'vs_ad_start_time'
     startTimeInput.setAttributeNode(startTimeInputClassAttr)
 
     var startTimeInputRequiredAttr = document.createAttribute('data-required')
@@ -115,7 +114,7 @@
     var closeButtonText = document.createTextNode('x');
     closeButton.appendChild(closeButtonText)
     var closeButtonClassAttr = document.createAttribute('class');
-    closeButtonClassAttr.value = 'sals_close_btn scb_' + serialNo;
+    closeButtonClassAttr.value = 'vs_close_btn scb_' + serialNo;
     closeButton.setAttributeNode(closeButtonClassAttr);
     var closeButtonTypeAttr = document.createAttribute('type');
     closeButtonTypeAttr.value = 'button';
@@ -147,7 +146,7 @@
   function generateShortcode(attr) {
     if (validateInput(attr)) {
       var shortcode = '';
-      shortcode += '[sals-video ';
+      shortcode += '[vs-video ';
       shortcode += 'main_video_url="' + attr.mUrl + '" ';
       shortcode += 'main_video_poster="' + attr.mPoster + '" ';
       shortcode += 'video_start_time="' + attr.vStart + '" ';
@@ -157,7 +156,6 @@
       shortcode += 'control_playpause="' + attr.cPP + '" ';
       shortcode += 'control_sound="' + attr.cSound + '" ';
       shortcode += 'control_volume="' + attr.cVolume + '" ';
-      shortcode += 'control_live="' + attr.cLive + '" ';
       shortcode += 'control_fullscreen="' + attr.cFs + '" ';
 
       shortcode += 'ad_video_urls="' + attr.aUrls.join(',') + '" ';
@@ -173,7 +171,7 @@
   function getPrivewLink(attr) {
     var mUrl = encodeURIComponent(attr.mUrl) || '%27%27'
     var link = '';
-    link += sals.previewPage;
+    link += vs.previewPage;
     link += '?main_video_url=' + (encodeURIComponent(attr.mUrl) || '%27%27');
     link += '&main_video_poster=' + (encodeURIComponent(attr.mPoster) || '%27%27');
     link += '&video_start_time=' + (attr.vStart || '%27%27');
@@ -182,7 +180,6 @@
     link += '&control_playpause=' + (attr.cPP || false);
     link += '&control_sound=' + (attr.cSound || false);
     link += '&control_volume=' + (attr.cVolume || false);
-    link += '&control_live=' + (attr.cLive || false);
     link += '&control_fullscreen=' + (attr.cFs || false);
     link += '&ad_video_urls=' + (encodeURIComponent(attr.aUrls) || '%27%27');
     link += '&ad_start_times=' + (attr.aStarts || '%27%27');
@@ -192,7 +189,7 @@
 
   function getAttr() {
 
-    var singleAdElms = document.querySelectorAll('.sals_single_ad');
+    var singleAdElms = document.querySelectorAll('.vs_single_ad');
 
     // variables for shortcode values
     var mainVideoURL = '';
@@ -208,12 +205,11 @@
     controlPlaypause = controlPlaypauseElm.checked;
     controlSound = controlSoundElm.checked;
     controlVolume = controlVolumeElm.checked;
-    controlLive = controlLiveElm.checked;
     controlFullscreen = controlFullscreenElm.checked;
 
     for (var j = 0; j < singleAdElms.length; j++) {
-      var adURLElm = singleAdElms[j].querySelector('.sals_ad_url');
-      var adStartTimeElm = singleAdElms[j].querySelector('.sals_ad_start_time');
+      var adURLElm = singleAdElms[j].querySelector('.vs_ad_url');
+      var adStartTimeElm = singleAdElms[j].querySelector('.vs_ad_start_time');
       if (adURLElm.value) {
         adsVideoURLs.push(adURLElm.value)
       }
@@ -241,8 +237,8 @@
 
   function validateInput(attr) {
     // just checking is any field value is empty
-    var singleAdElm = document.querySelectorAll('.sals_single_ad');
-    var allInputs = document.querySelectorAll('#sals_video_options_form input');
+    var singleAdElm = document.querySelectorAll('.vs_single_ad');
+    var allInputs = document.querySelectorAll('#vs_video_options_form input');
 
     if (
       !attr.mUrl || !attr.mPoster || !attr.vStart ||
@@ -255,20 +251,20 @@
       for (var i = 0; i < allInputs.length; i++) {
         if (!allInputs[i].value) {
           if (allInputs[i].getAttribute('data-required') === 'true') {
-            allInputs[i].classList.add('sals_error_field')
+            allInputs[i].classList.add('vs_error_field')
           }
         }
 
         allInputs[i].addEventListener('input', function() {
-          this.classList.remove('sals_error_field')
+          this.classList.remove('vs_error_field')
         })
       }
       return false;
     }
     if (date.getTime() > new Date(videoStartDatetimeElm.value).getTime()) {
-      videoStartDatetimeElm.classList = 'sals_error_field';
+      videoStartDatetimeElm.classList = 'vs_error_field';
       videoStartDatetimeElm.addEventListener('input', function() {
-        this.classList.remove('sals_error_field');
+        this.classList.remove('vs_error_field');
       })
       return false;
     }

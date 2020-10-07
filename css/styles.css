@@ -49,33 +49,33 @@ figcaption {
 }
 
 /* controls */
-figure.sals_videoContainer {
+figure.vs_videoContainer {
   width: 100%;
   position: relative;
   margin-bottom: 10px !important;
 }
 
-.sals_videoContainer video,
-.sals_videoContainer img {
+.vs_videoContainer video,
+.vs_videoContainer img {
   width: 100%;
   vertical-align: middle;
 }
 
-.sals_video-controls,
-.sals_video-controls > * {
+.vs_video-controls,
+.vs_video-controls > * {
   padding: 0;
   margin: 0;
 }
 
-.sals_videoContainer button {
+.vs_videoContainer button {
   background: transparent;
 }
 
-.sals_videoContainer button:hover {
+.vs_videoContainer button:hover {
   background: transparent;
 }
 
-.sals_video-controls {
+.vs_video-controls {
   width: 100%;
   overflow: hidden;
   background: transparent;
@@ -96,15 +96,15 @@ figure.sals_videoContainer {
   box-sizing: border-box;
 }
 
-.sals_video-controls[data-state='hidden'] {
+.vs_video-controls[data-state='hidden'] {
   display: none;
 }
 
-.sals_video-controls[data-state='visible'] {
+.vs_video-controls[data-state='visible'] {
   display: block;
 }
 
-.sals_video-controls > * {
+.vs_video-controls > * {
   float: left;
   width: 3.90625%;
   height: 100%;
@@ -112,16 +112,16 @@ figure.sals_videoContainer {
   display: block;
 }
 
-.sals_video-controls > *:first-child {
+.vs_video-controls > *:first-child {
   margin-left: 0;
 }
 
-.sals_video-controls .progress {
+.vs_video-controls .progress {
   cursor: pointer;
   width: 75.390625%;
 }
 
-.sals_video-controls button {
+.vs_video-controls button {
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
@@ -138,37 +138,37 @@ figure.sals_videoContainer {
   transition: 0.15s linear;
 }
 
-.sals_videoContainer:hover .sals_video-controls button {
+.vs_videoContainer:hover .vs_video-controls button {
   opacity: 0.5;
 }
 
-.sals_videoContainer:hover .sals_video-controls:hover button {
+.vs_videoContainer:hover .vs_video-controls:hover button {
   opacity: 1;
 }
 
-.sals_video-controls button:hover,
-.sals_video-controls button:focus {
+.vs_video-controls button:hover,
+.vs_video-controls button:focus {
   opacity: 1;
   background-size: 100%;
   background: transparent;
   outline: none;
 }
 
-.sals_video-controls button[data-state='play'] {
+.vs_video-controls button[data-state='play'] {
   background-image: url('../img/player_play.png');
   width: 30px;
   height: 30px;
   background-size: 100%;
 }
 
-.sals_video-controls button[data-state='pause'] {
+.vs_video-controls button[data-state='pause'] {
   background-image: url('../img/player_pause.png');
   width: 30px;
   height: 30px;
   background-size: 100%;
 }
 
-.sals_video-controls button[data-state='go-fullscreen'] {
+.vs_video-controls button[data-state='go-fullscreen'] {
   background-image: url('../img/fullscreen.png');
   width: 20px;
   height: 20px;
@@ -178,14 +178,14 @@ figure.sals_videoContainer {
   background-size: 100%;
 }
 
-.sals_video-controls button.sals_volume {
+.vs_video-controls button.vs_volume {
   width: 160px;
   height: 25px;
   cursor: initial;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__icon,
-.sals_video-controls button.sals_volume .sals_volume__icon[data-state='mute'] {
+.vs_video-controls button.vs_volume .vs_volume__icon,
+.vs_video-controls button.vs_volume .vs_volume__icon[data-state='mute'] {
   background-image: url('../img/volume.png');
   width: 25px;
   height: 25px;
@@ -200,11 +200,12 @@ figure.sals_videoContainer {
   position: relative;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__icon[data-state='muted'] {
+.vs_video-controls button.vs_volume .vs_volume__icon[data-state='muted'] {
   background-image: url('../img/mute.png');
+  background-size: 100%;
 }
 
-.sals_unmute_btn {
+.vs_unmute_btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -219,7 +220,7 @@ figure.sals_videoContainer {
   cursor: pointer;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__controller {
+.vs_video-controls button.vs_volume .vs_volume__controller {
   display: block;
   width: 100px;
   height: 5px;
@@ -233,7 +234,7 @@ figure.sals_videoContainer {
   cursor: pointer;
 }
 
-.sals_video-controls button.sals_volume .sals_volume__pointer {
+.vs_video-controls button.vs_volume .vs_volume__pointer {
   width: 15px;
   height: 13px;
   border-radius: 50%;
@@ -243,7 +244,7 @@ figure.sals_videoContainer {
   top: -4px;
 }
 
-.sals_video-controls button[data-state='cancel-fullscreen'] {
+.vs_video-controls button[data-state='cancel-fullscreen'] {
   background-image: url('../img/exitfullscreen.png');
   width: 20px;
   height: 20px;
@@ -253,7 +254,7 @@ figure.sals_videoContainer {
   background-size: 100%;
 }
 
-.sals_video-controls progress {
+.vs_video-controls progress {
   display: block;
   width: 100%;
   height: 81%;
@@ -268,24 +269,24 @@ figure.sals_videoContainer {
   /* Internet Explorer uses this value as the progress bar's value colour */
 }
 
-.sals_video-controls progress[data-state='fake'] {
+.vs_video-controls progress[data-state='fake'] {
   background: #e6e6e6;
   height: 65%;
 }
 
-.sals_video-controls progress span {
+.vs_video-controls progress span {
   width: 0%;
   height: 100%;
   display: inline-block;
   background-color: #2a84cd;
 }
 
-.sals_video-controls progress::-moz-progress-bar {
+.vs_video-controls progress::-moz-progress-bar {
   background-color: #0095dd;
 }
 
 /* Chrome requires its own rule for this, otherwise it ignores it */
-.sals_video-controls progress::-webkit-progress-value {
+.vs_video-controls progress::-webkit-progress-value {
   background-color: #0095dd;
 }
 
@@ -298,12 +299,12 @@ html:-ms-fullscreen {
   background-color: transparent;
 }
 
-video:-webkit-full-screen + .sals_video-controls {
+video:-webkit-full-screen + .vs_video-controls {
   background: #ccc;
   /* required for Chrome which doesn't heed the transparent value set above */
 }
 
-video:-webkit-full-screen + .sals_video-controls progress {
+video:-webkit-full-screen + .vs_video-controls progress {
   margin-top: 0.5rem;
 }
 
@@ -328,18 +329,18 @@ figure[data-fullscreen='true'] figcaption {
   display: none;
 }
 
-figure[data-fullscreen='true'] .sals_video-controls {
+figure[data-fullscreen='true'] .vs_video-controls {
   position: absolute;
   bottom: 5px;
   left: 0;
   z-index: 9999;
 }
 
-figure[data-fullscreen='true'] .sals_video-controls li {
+figure[data-fullscreen='true'] .vs_video-controls li {
   width: 5%;
 }
 
-figure[data-fullscreen='true'] .sals_video-controls .progress {
+figure[data-fullscreen='true'] .vs_video-controls .progress {
   width: 68%;
 }
 
@@ -353,11 +354,11 @@ figure[data-fullscreen='true'] .sals_video-controls .progress {
 }
 
 @media screen and (max-width: 42.5em) {
-  .sals_video-controls {
+  .vs_video-controls {
     height: auto;
   }
 
-  .sals_video-controls > * {
+  .vs_video-controls > * {
     display: block;
     width: 16.6667%;
     margin-left: 0;
@@ -365,7 +366,7 @@ figure[data-fullscreen='true'] .sals_video-controls .progress {
     height: 2.5rem;
   }
 
-  .sals_video-controls .progress {
+  .vs_video-controls .progress {
     /*display:table-caption;*/
     /* this trick doesn't work as elements are floated and the layout doesn't work */
     position: absolute;
@@ -375,12 +376,12 @@ figure[data-fullscreen='true'] .sals_video-controls .progress {
     margin-top: 0;
   }
 
-  .sals_video-controls .progress progress {
+  .vs_video-controls .progress progress {
     width: 98%;
     margin: 0 auto;
   }
 
-  .sals_video-controls button {
+  .vs_video-controls button {
     background-position: center center;
   }
 
@@ -397,11 +398,11 @@ button:focus {
 }
 
 /* Ads style */
-.sals_video_main {
+.vs_video_main {
   position: relative;
 }
 
-.sals_video_main .sals_ads {
+.vs_video_main .vs_ads {
   width: 100%;
   position: absolute;
   left: 0;
@@ -409,22 +410,22 @@ button:focus {
   z-index: 99999;
 }
 
-.sals_ads .sals__single_ad {
+.vs_ads .vs__single_ad {
   width: 100%;
   height: 100%;
 }
 
-.sals_ads .sals__single_ad .sals__video_ad {
+.vs_ads .vs__single_ad .vs__video_ad {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.sals_ads img {
+.vs_ads img {
   max-width: 100%;
 }
 
-button.sals__skip_btn {
+button.vs__skip_btn {
   min-width: 115px;
   background: transparent;
   opacity: 0.85;
@@ -448,37 +449,37 @@ button.sals__skip_btn {
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-button.sals__skip_btn:hover,
-button.sals__skip_btn:active,
-button.sals__skip_btn:focus {
+button.vs__skip_btn:hover,
+button.vs__skip_btn:active,
+button.vs__skip_btn:focus {
   opacity: 1;
   outline: none;
 }
 
-.sals_video_placeholder {
+.vs_video_placeholder {
   background: #63dd8d;
   padding: 1.5rem;
   text-align: center;
 }
 
-.sals_video_placeholder h2 {
+.vs_video_placeholder h2 {
   color: #333;
   font-weight: 300;
   margin-top: 12px;
   font-size: 1.8rem;
 }
 
-.sals_video_placeholder h2::before,
-.sals_video_placeholder h2::after {
+.vs_video_placeholder h2::before,
+.vs_video_placeholder h2::after {
   display: none;
 }
 
-.sals_video_placeholder img {
+.vs_video_placeholder img {
   text-align: center;
   vertical-align: middle;
 }
 
-.sals_video_loading {
+.vs_video_loading {
   position: absolute;
   left: 43%;
   top: 36%;
@@ -490,7 +491,7 @@ button.sals__skip_btn:focus {
   opacity: 0.5;
 }
 
-.sals_video_loading img {
+.vs_video_loading img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -498,14 +499,14 @@ button.sals__skip_btn:focus {
   transform: scale(1.1);
 }
 
-p.sals_video_info {
+p.vs_video_info {
   color: #555;
   margin-top: 10px !important;
   font-size: 0.9rem;
   line-height: 1;
 }
 
-.sals_live_now {
+.vs_live_now {
   float: right;
   font-size: 16px;
   margin-right: 10px;
@@ -517,7 +518,7 @@ p.sals_video_info {
   line-height: 1.8;
 }
 
-.sals_live_now::before {
+.vs_live_now::before {
   content: '';
   width: 6px;
   height: 6px;
@@ -528,7 +529,7 @@ p.sals_video_info {
   left: 0;
 }
 
-.sals_priview_container {
+.vs_priview_container {
   max-width: 60%;
   margin-left: auto;
   margin-right: auto;

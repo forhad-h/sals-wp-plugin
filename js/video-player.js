@@ -9,13 +9,13 @@
     var playVideo = function(video, adDuration = 0) {
       var playTime = 0;
       var startTime = video.getAttribute('data-videostart');
-      var playerScriptElm = document.getElementById('sals_video_player_prev_script');
+      var playerScriptElm = document.getElementById('vs_video_player_prev_script');
       var ajaxurl = '';
       if (playerScriptElm) {
         ajaxurl = decodeURI(playerScriptElm.src).split('ajaxUrl=')[1].split('&')[0];
 
       } else {
-        ajaxurl = sals.ajaxurl;
+        ajaxurl = vs.ajaxurl;
       }
 
       if (window.XMLHttpRequest) {
@@ -32,9 +32,9 @@
           if (video.readyState === 4) {
             clearInterval(confirmMetaData);
 
-            var ajaxURLFields = '?action=sals_play_time&starttime=' + startTime +
+            var ajaxURLFields = '?action=vs_play_time&starttime=' + startTime +
               '&duration=' + video.duration;
-            xhttp.open("GET", ajaxurl + ajaxURLFields, true); // sals.ajaxurl comes from wp_localize_script function
+            xhttp.open("GET", ajaxurl + ajaxURLFields, true); // vs.ajaxurl comes from wp_localize_script function
             xhttp.send();
           }
         }, 200)
@@ -48,24 +48,24 @@
     if (!supportsVideo) return false;
 
     // Obtain handles to main elements
-    var videoContainer = document.querySelectorAll('.sals_videoContainer');
-    var video = document.querySelectorAll('.sals_video');
-    var videoControls = document.querySelectorAll('.sals_video-controls');
+    var videoContainer = document.querySelectorAll('.vs_videoContainer');
+    var video = document.querySelectorAll('.vs_video');
+    var videoControls = document.querySelectorAll('.vs_video-controls');
 
     // Obtain handles to buttons and other elements
-    var playpause = document.querySelectorAll('.sals_playpause');
-    var fullscreen = document.querySelectorAll('.sals_fs');
-    var volumeController = document.querySelectorAll('.sals_volume__controller');
-    var unmuteBtn = document.querySelectorAll('.sals_unmute_btn');
-    var volumeIcon = document.querySelectorAll('.sals_volume__icon');
+    var playpause = document.querySelectorAll('.vs_playpause');
+    var fullscreen = document.querySelectorAll('.vs_fs');
+    var volumeController = document.querySelectorAll('.vs_volume__controller');
+    var unmuteBtn = document.querySelectorAll('.vs_unmute_btn');
+    var volumeIcon = document.querySelectorAll('.vs_volume__icon');
 
     var playPauseAnimationElm = document.querySelectorAll('.play_pause_animation');
-    var loadingElm = document.querySelectorAll('.sals_video_loading');
+    var loadingElm = document.querySelectorAll('.vs_video_loading');
 
     // Obtain handles to Ads buttons
-    var ads = document.querySelectorAll('.sals_ads');
+    var ads = document.querySelectorAll('.vs_ads');
 
-    var sals_liveTime = [],
+    var vs_liveTime = [],
       increaseTime = [],
       checkAds = [],
       pausedByAd = false;
@@ -85,7 +85,7 @@
 
     for (var i = 0; i < videoContainer.length; i++) {
       // custom variables
-      var hasFSClassName = 'sals_hasFullscreen';
+      var hasFSClassName = 'vs_hasFullscreen';
 
       // Hide the default controls
       video[i].controls = false;
@@ -106,7 +106,7 @@
       // Control volumechange
       volumeController[i].addEventListener('click', function(e) {
         var uid = this.getAttribute('data-uid');
-        var pointerElm = this.querySelector('.sals_volume__pointer');
+        var pointerElm = this.querySelector('.vs_volume__pointer');
         var pos = e.pageX - this.getBoundingClientRect().left;
         volumeIcon[uid].setAttribute('data-state', 'unmuted');
         unmuteBtn[uid].style.display = 'none';
@@ -161,7 +161,7 @@
 
           // var playTime = parseFloat(sessionStorage.getItem('playTime-' + uid));
           // if (!playTime) {
-          //   video[uid].currentTime = sals_liveTime[uid];
+          //   video[uid].currentTime = vs_liveTime[uid];
           // } else {
           //   video[uid].currentTime = playTime;
           // }
@@ -193,13 +193,13 @@
 
           // pause action
           clearInterval(checkAds[uid]);
-          sals_liveTime[uid] = video[uid].currentTime;
+          vs_liveTime[uid] = video[uid].currentTime;
 
           if (!pausedByAd) {
             increaseTime[uid] = setInterval(function() {
-              if (Math.floor(video[uid].duration) > sals_liveTime[uid]) {
-                adToggle(sals_liveTime[uid], uid)
-                sals_liveTime[uid] += 1
+              if (Math.floor(video[uid].duration) > vs_liveTime[uid]) {
+                adToggle(vs_liveTime[uid], uid)
+                vs_liveTime[uid] += 1
               } else {
                 clearInterval(increaseTime[uid]);
                 return;
@@ -236,7 +236,7 @@
 
 
         // Add events for all buttons
-        sals_liveTime.push(0);
+        vs_liveTime.push(0);
         increaseTime.push('');
         checkAds.push('');
 
@@ -366,21 +366,21 @@
     }
 
     // display or hide Ads
-    var adToggle = function(sals_liveTime, uid) {
+    var adToggle = function(vs_liveTime, uid) {
 
       var singleAdStartElm = ads[uid]
-        .querySelector("[data-adstart='" + Math.floor(sals_liveTime) + "']");
+        .querySelector("[data-adstart='" + Math.floor(vs_liveTime) + "']");
 
       // save paused time into session storage
       // if (typeof(Storage) !== 'undefined') {
-      //   sessionStorage.setItem('playTime-' + uid, Math.floor(sals_liveTime));
+      //   sessionStorage.setItem('playTime-' + uid, Math.floor(vs_liveTime));
       // }
       // var playTime = parseFloat(sessionStorage.getItem('playTime-' + uid));
 
       if (singleAdStartElm) {
         // video of Ad which is streaming now
-        var adVideo = singleAdStartElm.querySelector('.sals__video_ad');
-        var skipBtnElm = singleAdStartElm.querySelector('.sals__skip_btn');
+        var adVideo = singleAdStartElm.querySelector('.vs__video_ad');
+        var skipBtnElm = singleAdStartElm.querySelector('.vs__skip_btn');
         var counter = 5;
 
         if (singleAdStartElm.getAttribute('data-addisplayed') !== "true") {

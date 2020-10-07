@@ -1,27 +1,27 @@
-.sals_options_wrapper input {
+.vs_options_wrapper input {
   border-radius: 3px;
   background: #fff;
 }
 
-.sals_options_wrapper button {
+.vs_options_wrapper button {
   opacity: 0.8;
 }
 
-.sals_options_wrapper button:hover,
-.sals_options_wrapper button:active,
-.sals_options_wrapper button:focus {
+.vs_options_wrapper button:hover,
+.vs_options_wrapper button:active,
+.vs_options_wrapper button:focus {
   opacity: 1;
   outline: none;
 }
 
-.sals_options_wrapper {
+.vs_options_wrapper {
   display: flex;
   margin-top: 25px;
   margin-right: 20px;
   justify-content: space-between;
 }
 
-.sals_options_area {
+.vs_options_area {
   width: 600px;
   max-width: 100%;
   border: 1px solid;
@@ -30,7 +30,7 @@
   border-radius: 3px;
 }
 
-.sals_shortcode_area {
+.vs_shortcode_area {
   background: #ddd;
   padding: 20px;
   border-radius: 5px;
@@ -39,7 +39,7 @@
   width: 370px;
 }
 
-.sals_shortcode_container {
+.vs_shortcode_container {
   background: #e3e3e3;
   resize: none;
   width: 100%;
@@ -48,7 +48,7 @@
   border-radius: 5px;
 }
 
-.sals_shortcode_container:focus {
+.vs_shortcode_container:focus {
   border: 1px solid #888;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -56,10 +56,10 @@
   box-shadow: none;
 }
 
-.sals_options_wrapper h1,
-.sals_options_wrapper h2,
-.sals_options_wrapper h3,
-.sals_options_wrapper h4 {
+.vs_options_wrapper h1,
+.vs_options_wrapper h2,
+.vs_options_wrapper h3,
+.vs_options_wrapper h4 {
   color: #666;
   font-weight: 400;
   letter-spacing: 1px;
@@ -68,39 +68,39 @@
   margin-right: 3px;
 }
 
-.sals_options_wrapper h1 {
+.vs_options_wrapper h1 {
   text-align: center;
   margin-bottom: 30px;
   font-size: 1.8rem;
 }
 
-.sals_options_wrapper h2 {
+.vs_options_wrapper h2 {
   font-size: 1.4rem;
 }
 
-.sals_options_wrapper h3 {
+.vs_options_wrapper h3 {
   margin-bottom: 5px;
   font-size: 1rem;
 }
 
-.sals_options_wrapper h4 {
+.vs_options_wrapper h4 {
   margin-bottom: 5px;
 }
 
-.sals_single_option input:not([type=checkbox]) {
+.vs_single_option input:not([type=checkbox]) {
   width: 100%;
   padding: 5px;
   color: #555;
 }
 
-.sals_single_option input[type=checkbox] {
+.vs_single_option input[type=checkbox] {
   margin-left: 10px;
 }
 
-.sals_new_ad_btn,
-.sals_submit_btn,
-.sals_generate_btn,
-.sals_preview_btn {
+.vs_new_ad_btn,
+.vs_submit_btn,
+.vs_generate_btn,
+.vs_preview_btn {
   background: #00bb3f;
   border: 0 none;
   padding: 7px 14px;
@@ -116,41 +116,41 @@
   display: inline-block;
 }
 
-.sals_submit_btn_wrapper {
+.vs_submit_btn_wrapper {
   display: inline-block;
   text-align: right;
 }
 
-.sals_submit_btn {
+.vs_submit_btn {
   padding: 10px 20px;
   background: #06799f;
 }
 
-.sals_generate_btn,
-.sals_preview_btn {
+.vs_generate_btn,
+.vs_preview_btn {
   background: #0679a0;
 }
 
-.sals_preview_btn {
+.vs_preview_btn {
   margin-top: 12px;
 }
 
-.sals_preview_btn:hover,
-.sals_preview_btn:active,
-.sals_preview_btn:focus {
+.vs_preview_btn:hover,
+.vs_preview_btn:active,
+.vs_preview_btn:focus {
   color: #eee;
   text-decoration: none;
 }
 
-.sals_submit_btn[disabled] {
+.vs_submit_btn[disabled] {
   background: #666;
 }
 
-.sals_submit_btn[disabled]:hover {
+.vs_submit_btn[disabled]:hover {
   opacity: 0.9;
 }
 
-.sals_single_ad {
+.vs_single_ad {
   border: 1px solid #ccc;
   padding: 0 20px 20px 20px;
   margin-bottom: 10px;
@@ -158,11 +158,11 @@
   position: relative;
 }
 
-.sals_single_ad input {
+.vs_single_ad input {
   padding: 5px;
 }
 
-.sals_close_btn {
+.vs_close_btn {
   position: absolute;
   top: 5px;
   right: 4px;
@@ -179,19 +179,19 @@
   transition: 0.15s linear;
 }
 
-.sals_close_btn:hover {
+.vs_close_btn:hover {
   border: 1px solid #555;
   color: #555;
 }
 
-input.sals_error_field {
+input.vs_error_field {
   -webkit-box-shadow: 0 0 5px #f00;
   -moz-box-shadow: 0 0 5px #f00;
   -o-box-shadow: 0 0 5px #f00;
   box-shadow: 0 0 5px #f00;
 }
 
-.sals_info {
+.vs_info {
   display: block;
   font-size: 0.8rem;
   color: #777;
