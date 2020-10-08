@@ -1,6 +1,16 @@
-.vs_options_wrapper input {
+/*
+  Styles for admin configuration
+*/
+/*
+  General rules
+*/
+.vs_options_wrapper input:not([type=radio]) {
   border-radius: 3px;
   background: #fff;
+}
+
+.vs_options_wrapper input {
+  border-color: #bbb;
 }
 
 .vs_options_wrapper button {
@@ -25,8 +35,8 @@
   width: 600px;
   max-width: 100%;
   border: 1px solid;
-  border: 2px solid #aaa;
-  padding: 20px;
+  border: 1px solid #ccc;
+  padding: 0 20px 20px;
   border-radius: 3px;
 }
 
@@ -87,21 +97,37 @@
   margin-bottom: 5px;
 }
 
-.vs_single_option input:not([type=checkbox]) {
+/*
+Each part of video configuration
+*/
+.vs_single_option .vs_inner_section {
+  margin-left: 15px;
+}
+
+.vs_single_option input:not([type=checkbox]):not([type=radio]) {
   width: 100%;
   padding: 5px;
   color: #555;
 }
 
-.vs_single_option input[type=checkbox] {
+.vs_single_option input[type=checkbox],
+.vs_single_option input[type=radio] {
   margin-left: 10px;
+}
+
+.vs_single_option .video_type {
+  margin-bottom: 7px;
+}
+
+.vs_single_option .video_type label:first-child input[type=radio] {
+  margin-left: 2px;
 }
 
 .vs_new_ad_btn,
 .vs_submit_btn,
 .vs_generate_btn,
 .vs_preview_btn {
-  background: #00bb3f;
+  background: #666;
   border: 0 none;
   padding: 7px 14px;
   font-size: 1.2rem;

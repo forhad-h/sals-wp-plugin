@@ -1,5 +1,6 @@
 !(function() {
-  // variables fro required elements
+  var vsOptionsAreaElm = document.querySelector('.vs_options_area');
+  // variables form required elements
   var addWrapperElm = document.querySelector('.vs_ads_wrapper');
   var addNewBtnElm = document.querySelector('.vs_new_ad_btn');
   var adsWrapper = document.querySelector('.vs_ads_wrapper');
@@ -19,6 +20,33 @@
   var controlVolumeElm = document.getElementById('control_volume');
   var controlFullscreenElm = document.getElementById('control_fullscreen');
 
+  /* Video Type */
+  var videoTypeElm = document.querySelector('.video_type');
+  var selfHosted = 'self-hosted'
+  var youtube = 'youtube'
+  var vimeo = 'vimeo'
+  var videoType = selfHosted // default value should be self-hosted
+
+
+  videoTypeElm.addEventListener('change', function(event) {
+    switch (event.target.value) {
+      case selfHosted:
+        mainVideoURLElm.setAttribute('placeholder', 'Enter your Self-hosted video URL');
+        videoType = selfHosted;
+        break;
+      case youtube:
+        mainVideoURLElm.setAttribute('placeholder', 'Enter your Youtube video URL');
+        videoType = youtube;
+        break;
+      case vimeo:
+        mainVideoURLElm.setAttribute('placeholder', 'Enter your Vimeo video URL');
+        videoType = vimeo;
+        break;
+      default:
+        return;
+    }
+  })
+
   var serialNo = 0;
 
   if (addNewBtnElm) {
@@ -35,7 +63,7 @@
   }
   if (previewButton) {
     previewButton.addEventListener('click', function() {
-      var attr = getAttr();
+      var attr = getInputs();
       if (validateInput(attr)) {
         window.open(getPrivewLink(attr), '_blank');
       } else return;
@@ -56,6 +84,15 @@
   if (videoStartDatetimeElm) {
     videoStartDatetimeElm.value = DateTimeISONow;
   }
+
+  /*
+   * Remove error class and message when input
+   */
+  vsOptionsAreaElm.addEventListener('input', function(event) {
+    if (event.target.classList.contains('vs_error_field')) {
+      event.target.classList.remove('vs_error_field')
+    }
+  })
 
   function makeAdSection(serial) {
     // make options elements
@@ -138,15 +175,20 @@
     })
   }
 
+  // Display shortcode
   function addShortcode() {
-    var attr = getAttr();
+    var attr = getInputs();
     shortcodeContainerElm.value = generateShortcode(attr);
   }
 
+  /*
+   * Shortcode generator function
+   */
   function generateShortcode(attr) {
     if (validateInput(attr)) {
       var shortcode = '';
       shortcode += '[vs-video ';
+      shortcode += 'video_type="' + videoType + '" ';
       shortcode += 'main_video_url="' + attr.mUrl + '" ';
       shortcode += 'main_video_poster="' + attr.mPoster + '" ';
       shortcode += 'video_start_time="' + attr.vStart + '" ';
@@ -187,7 +229,8 @@
     return link + "/";
   }
 
-  function getAttr() {
+  // Get all input values as an object
+  function getInputs() {
 
     var singleAdElms = document.querySelectorAll('.vs_single_ad');
 
@@ -227,7 +270,6 @@
       cPP: controlPlaypause,
       cSound: controlSound,
       cVolume: controlVolume,
-      cLive: controlLive,
       cFs: controlFullscreen,
       aUrls: adsVideoURLs,
       aStarts: adsVideoStartTimes
@@ -240,35 +282,61 @@
     var singleAdElm = document.querySelectorAll('.vs_single_ad');
     var allInputs = document.querySelectorAll('#vs_video_options_form input');
 
-    if (
-      !attr.mUrl || !attr.mPoster || !attr.vStart ||
+    // validate required fields
+    if (!(isValidRequiredFields() && isValidDateTimeFields())) return false;
+
+    return true;
+  }
+
+  /*
+   * Check validation of all inputs
+   */
+  function isValidInput(attr) {
+    var urlPattern = /[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?/
+    var isUrl = urlPattern.test(attr.mUrl)
+
+    if (!attr.mUrl || !attr.mPoster || !attr.vStart ||
       (singleAdElm.length > 0 &&
         (attr.aUrls.length <= 0 || attr.aStarts.length <= 0)) ||
       singleAdElm.length !== attr.aUrls.length ||
-      singleAdElm.length !== attr.aStarts.length
-    ) {
+      singleAdElm.length !== attr.aStarts.length) return true
 
-      for (var i = 0; i < allInputs.length; i++) {
-        if (!allInputs[i].value) {
-          if (allInputs[i].getAttribute('data-required') === 'true') {
-            allInputs[i].classList.add('vs_error_field')
-          }
-        }
+    return
+  }
 
-        allInputs[i].addEventListener('input', function() {
-          this.classList.remove('vs_error_field')
-        })
+  /*
+   * Check validation for required fields
+   */
+  function isValidRequiredFields() {
+
+    var requiredElms = document.querySelectorAll('[data-required=true]');
+    var isValid = false;
+
+    requiredElms.forEach(function(item) {
+      if (!item.value) {
+        item.classList.add('vs_error_field');
+        isValid = false;
+      } else {
+        isValid = true;
       }
-      return false;
-    }
+    });
+
+    return isValid;
+
+  }
+
+  /*
+   * Check validation for Date and Time input
+   */
+  function isValidDateTimeFields() {
+    var isValid = false;
     if (date.getTime() > new Date(videoStartDatetimeElm.value).getTime()) {
-      videoStartDatetimeElm.classList = 'vs_error_field';
-      videoStartDatetimeElm.addEventListener('input', function() {
-        this.classList.remove('vs_error_field');
-      })
-      return false;
+      videoStartDatetimeElm.classList.add('vs_error_field');
+      isValid = false;
+    } else {
+      isValid = true
     }
-    return true;
+    return isValid;
   }
 
 })()
