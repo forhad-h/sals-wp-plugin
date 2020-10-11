@@ -9,11 +9,14 @@
                 <h2>Main Video</h2>
                 <div class="vs_inner_section">
                   <h3>Video URL *</h3>
+                  <!-- Video type option
                   <div class="video_type">
                     <label><input type="radio" name="video_type" value="self-hosted" checked/>Self-hosted</label>
                     <label><input type="radio" name="video_type" value="youtube"/>Youtube</label>
                     <label><input type="radio" name="video_type" value="vimeo"/>Vimeo</label>
                   </div>
+                  -->
+
                   <input type="url" name="main_video_url" id="main_video_url" value=""  data-required="true" placeholder="Enter your Self-hosted video URL"/>
                   <h3>Video Poster URL *</h3>
                   <input type="text" name="main_video_poster" id="main_video_poster" value="" data-required="true"/>

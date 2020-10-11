@@ -21,11 +21,13 @@
   var controlFullscreenElm = document.getElementById('control_fullscreen');
 
   /* Video Type */
+  /*
   var videoTypeElm = document.querySelector('.video_type');
   var selfHosted = 'self-hosted'
   var youtube = 'youtube'
   var vimeo = 'vimeo'
   var videoType = selfHosted // default value should be self-hosted
+
 
 
   videoTypeElm.addEventListener('change', function(event) {
@@ -46,6 +48,7 @@
         return;
     }
   })
+  */
 
   var serialNo = 0;
 
@@ -188,7 +191,9 @@
     if (validateInput(attr)) {
       var shortcode = '';
       shortcode += '[vs-video ';
+      /*
       shortcode += 'video_type="' + videoType + '" ';
+      */
       shortcode += 'main_video_url="' + attr.mUrl + '" ';
       shortcode += 'main_video_poster="' + attr.mPoster + '" ';
       shortcode += 'video_start_time="' + attr.vStart + '" ';
