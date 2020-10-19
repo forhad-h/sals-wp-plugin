@@ -51,6 +51,7 @@ function vs_video_shortcode($attr) {
         <?php } ?>
 
       </div>
+      <div class="vs_video_time">00:00</div>
       <div class="vs_video-controls" data-state="hidden">
         <button class="vs_playpause" type="button" data-state="play"
         style="display: <?= $control_playpause === 'true' ? 'block' : 'none';?>">

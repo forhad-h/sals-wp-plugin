@@ -62,7 +62,7 @@ figure.vs_videoContainer {
 }
 
 .vs_video-controls,
-.vs_video-controls > * {
+.vs_video-controls>* {
   padding: 0;
   margin: 0;
 }
@@ -104,7 +104,20 @@ figure.vs_videoContainer {
   display: block;
 }
 
-.vs_video-controls > * {
+.vs_video_time {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+  color: #fff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 2px 15px 0px;
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+
+.vs_video-controls>* {
   float: left;
   width: 3.90625%;
   height: 100%;
@@ -112,7 +125,7 @@ figure.vs_videoContainer {
   display: block;
 }
 
-.vs_video-controls > *:first-child {
+.vs_video-controls>*:first-child {
   margin-left: 0;
 }
 
@@ -299,12 +312,12 @@ html:-ms-fullscreen {
   background-color: transparent;
 }
 
-video:-webkit-full-screen + .vs_video-controls {
+video:-webkit-full-screen+.vs_video-controls {
   background: #ccc;
   /* required for Chrome which doesn't heed the transparent value set above */
 }
 
-video:-webkit-full-screen + .vs_video-controls progress {
+video:-webkit-full-screen+.vs_video-controls progress {
   margin-top: 0.5rem;
 }
 
@@ -358,7 +371,7 @@ figure[data-fullscreen='true'] .vs_video-controls .progress {
     height: auto;
   }
 
-  .vs_video-controls > * {
+  .vs_video-controls>* {
     display: block;
     width: 16.6667%;
     margin-left: 0;

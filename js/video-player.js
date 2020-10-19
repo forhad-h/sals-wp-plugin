@@ -52,6 +52,7 @@
     var video = document.querySelectorAll('.vs_video');
     var videoControls = document.querySelectorAll('.vs_video-controls');
 
+
     // Obtain handles to buttons and other elements
     var playpause = document.querySelectorAll('.vs_playpause');
     var fullscreen = document.querySelectorAll('.vs_fs');
@@ -61,6 +62,10 @@
 
     var playPauseAnimationElm = document.querySelectorAll('.play_pause_animation');
     var loadingElm = document.querySelectorAll('.vs_video_loading');
+
+    // video timer
+    var videoTimeElm = document.querySelector('.vs_video_time')
+
 
     // Obtain handles to Ads buttons
     var ads = document.querySelectorAll('.vs_ads');
@@ -173,6 +178,8 @@
               clearInterval(checkAds[uid]);
               return;
             }
+
+            videoTimeElm.innerText = getFormatedTime(video[uid].currentTime)
           }, 1000);
 
 
@@ -204,6 +211,8 @@
                 clearInterval(increaseTime[uid]);
                 return;
               }
+
+              videoTimeElm.innerText = getFormatedTime(vs_liveTime[uid])
             }, 1000)
           }
         }, false);
@@ -285,6 +294,7 @@
     }
 
     // Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
+
 
     document.addEventListener('fullscreenchange', function(e) {
       var vcuid = getVcuid(document.fullscreenElement)
@@ -442,6 +452,21 @@
         }
       }
       return vcuid;
+    }
+
+    var getFormatedTime = function(sec) {
+      var hours = Math.floor(sec / (60 * 60))
+      var miniutes = Math.floor(sec / 60)
+      var seconds = Math.floor(sec % 60)
+
+      seconds = seconds <= 9 ? '0' + seconds : seconds
+
+      if (hours) {
+        return hours + ':' + miniutes + ':' + seconds
+      }
+
+      return miniutes + ':' + seconds
+
     }
 
   }
