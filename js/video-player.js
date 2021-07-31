@@ -406,6 +406,7 @@
           ads[uid].style.display = 'block'
           singleAdStartElm.style.display = 'block'
           adVideo.volume = video[uid].volume
+          adVideo.style.width = '100%';
           adVideo.play()
           // after ads video ended
           adVideo.addEventListener('ended', function() {

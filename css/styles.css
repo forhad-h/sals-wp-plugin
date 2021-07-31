@@ -6,6 +6,10 @@ body {
   height: 100%;
 }
 
+button:not(.toggle), .button, .faux-button, .wp-block-button__link, .wp-block-file .wp-block-file__button, input[type="button"], input[type="reset"], input[type="submit"], .bg-accent, .bg-accent-hover:hover, .bg-accent-hover:focus, :root .has-accent-background-color, .comment-reply-link {
+  background-color: rgba(255,255,255,0)!important;
+}
+
 body {
   color: #666;
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', Lucida,
@@ -473,6 +477,11 @@ button.vs__skip_btn:focus {
   background: #63dd8d;
   padding: 1.5rem;
   text-align: center;
+  height: 351px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .vs_video_placeholder h2 {
@@ -515,7 +524,7 @@ button.vs__skip_btn:focus {
 p.vs_video_info {
   color: #555;
   margin-top: 10px !important;
-  font-size: 0.9rem;
+  font-size: 20px;
   line-height: 1;
 }
 
